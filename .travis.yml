@@ -13,8 +13,5 @@ bundler_args: --binstubs=./bundler_stubs
 deploy:
   provider: heroku
   app: projectze
-  api_key:
-  	secure: "ac2f23ae-49dc-46e5-bb29-8bd65ce12cc6"
+  api_key: "ac2f23ae-49dc-46e5-bb29-8bd65ce12cc6"
   strategy: git
-  on:
-  	branch: master
