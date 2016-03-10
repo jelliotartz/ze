@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+  - 2.0.0
+env:
+  - DB=postgresql
+script:
+  - bundle exec rake spec
+before_script:
+  - bundle exec rake db:create RAILS_ENV=test
+  - bundle exec rake db:migrate
+  - bundle exec rake db:test:prepare
+bundler_args: --binstubs=./bundler_stubs
+deploy:
+  provider: heroku
+  app: projectze
+  api_key: "ac2f23ae-49dc-46e5-bb29-8bd65ce12cc6"
+  strategy: git
