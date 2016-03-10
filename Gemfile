@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'rake', '< 11.0'
 
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -35,6 +36,7 @@ gem 'rake', '< 11.0'
 
 group :test do
   gem 'capybara'
+  gem 'simplecov', :require => false
 end
 
 group :development, :test do
