@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    redirect_to welcome_path
   end
 
   def create

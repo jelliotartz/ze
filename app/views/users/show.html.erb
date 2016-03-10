@@ -1,0 +1,11 @@
+<%= link_to "Back to Home", welcome_path %><br>
+
+<% if current_user == @user %>
+  <%= link_to "Edit Profile", edit_user_path(@user) %><br>
+<% end %>
+
+<% if logged_in? %>
+  <h1><%= @user.email %></h1>
+<% end %>
+
+
