@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
 
-  resources :users do only: [:new, :create,]
+  resources :users, only: [:new, :create, :edit, :update]
 
-    resources :groups do except: [:edit, :update]
+  resources :groups
 
-      resources :samples except: [:edit, :update]
+  resources :samples, except: [:edit, :update]
 
-      resources :reports except: [:edit, :update]
+  resources :reports, except: [:edit, :update]
 
-    end
 
-  end
+  post '/login' => "sessions#create"
+
+  delete '/logout' => "sessions#destroy"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
