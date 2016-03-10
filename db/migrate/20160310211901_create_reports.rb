@@ -3,6 +3,8 @@ class CreateReports < ActiveRecord::Migration
     create_table :reports do |t|
       t.integer :sample_id
       t.integer :ze_score
+
+      t.timestamps null: false
     end
   end
 end
