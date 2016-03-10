@@ -2,27 +2,26 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    redirect_to welcome_path
+    redirect_to users_path
   end
 
   def show
     if logged_in?
       @user = User.find(params[:id])
     else
-      redirect_to welcome_path
+      redirect_to users_path
     end
   end
 
   def new
     @user = User.new
-    redirect_to welcome_path
   end
 
   def create
     @user = User.new(user_params)
       if @user.save
         session[:user_id] = @user.id
-        redirect_to welcome_path
+        redirect_to '/'
       else
         render 'new'
       end
@@ -45,14 +44,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     flash.notice = "#{@user.name} has been destroyed."
-    redirect_to welcome_path
+    redirect_to users_path
   end
 
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:email, :password)
   end
 
 
