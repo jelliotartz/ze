@@ -27,7 +27,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'rake', '< 11.0'
 
-
+gem 'unirest'
+gem 'guess'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
