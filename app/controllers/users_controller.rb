@@ -2,14 +2,14 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    redirect_to users_path
+    redirect_to '/'
   end
 
   def show
     if logged_in?
       @user = User.find(params[:id])
     else
-      redirect_to users_path
+      redirect_to '/'
     end
   end
 
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     flash.notice = "#{@user.name} has been destroyed."
-    redirect_to users_path
+    redirect_to '/'
   end
 
 
