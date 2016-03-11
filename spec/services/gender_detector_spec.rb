@@ -115,30 +115,3 @@ describe GenderDetector do
   end
 
 end
-
-# {
-#   "sentiment_targeted":
-#   [
-#     { "text": "Hillary", "type": "Entity",
-#       "sentiment": { "type": "negative", "score": "-0.738312" }
-#       "gender": "female"
-#     },
-#   ]
-# }
-
-
-
-# {
-#   "sentiment_targeted":
-#   [
-#     { "text": "Hillary", "type": "Entity",
-#       "sentiment": { "type": "negative", "score": "-0.738312" }
-#     },
-#     { "text": "male candidate", "type": "Keyword",
-#       "sentiment": { "score": "0.559216", "type": "positive" }
-#     },
-#     { "text": "Hillary", "type": "Keyword",
-#       "sentiment": { "score": "-0.738312", "type": "negative" }
-#     }
-#   ]
-# }

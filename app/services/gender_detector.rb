@@ -47,8 +47,6 @@ module GenderDetector
 
   end
 
-# {"name":"Dominique","country":"US","language":"EN","responseType":"SUCCESS","gender":"FEMALE","maleCount":67,"malePercent":19,"femaleCount":270,"femalePercent":80}
-
   def self.detect_name(text)
 
     unisex_threshold = 0.6
