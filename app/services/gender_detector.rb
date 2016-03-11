@@ -68,7 +68,3 @@ module GenderDetector
   end
 
 end
-
-# curl --get --include 'https://udayogra-find-gender-by-name-v1.p.mashape.com/analysis?firstname=pat' \
-#   -H 'X-Mashape-Key: omYD7TNYZwmshJlr4987LpKgEVspp1KKZ8gjsnJSUU1wZFLLjB' \
-#   -H 'Accept: application/json'
