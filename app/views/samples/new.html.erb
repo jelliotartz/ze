@@ -6,6 +6,7 @@
 <% end %>
 
 <% if @keywords %>
+  <p><%= markup_keywords(@sample).html_safe %></p>
   <br>
   <h1>Keywords</h1>
   <% @keywords.each do |keyword| %>

@@ -7,3 +7,11 @@
 <% if logged_in? %>
   <h1><%= @user.email %></h1>
 <% end %>
+
+<ul>
+<% @user.samples.each do |sample| %>
+
+  <li><%= markup_keywords(sample).html_safe %></li>
+
+<% end %>
+</ul>

@@ -5,7 +5,8 @@ class MetricsCalculator
   end
 
   def keywords_average(keywords)
-      keywords.map {|keyword| keyword.sentiment_score }.reduce(0, :+) / keywords.count
+    keywords = keywords.reject {|keyword| keyword.sentiment_score.nil? }
+    keywords.map {|keyword| keyword.sentiment_score }.reduce(0, :+) / keywords.count
   end
 
   def return_averages_by_gender
