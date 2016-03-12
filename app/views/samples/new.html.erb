@@ -7,10 +7,10 @@
 
 <%= button_to "Tweets", tweets_path   %>
 
-<% if @gendered_entities %>
+<% if @gendered_keywords %>
   <br>
   <h1>Keywords</h1>
-  <% @gendered_entities.each do |entity| %>
+  <% @gendered_keywords.each do |entity| %>
     <ul>
       <li>Text: <%= entity['text'] %></li>
       <li>Sentiment score: <%= entity['sentiment']['score'] %></li>

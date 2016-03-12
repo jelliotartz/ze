@@ -29,6 +29,13 @@ class TwitterScraper
     end
   end
 
+  def concatenate_tweets(tweet_objects)
+    concatenated_tweets = ""
+    tweet_objects.each do |tweet|
+      concatenated_tweets += tweet.text
+    end
+    return concatenated_tweets
+  end
 
   def self.search
     client.search("to:justinbieber marry me", result_type: "recent").take(3).each do |tweet|
