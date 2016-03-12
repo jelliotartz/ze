@@ -1,4 +1,4 @@
-<h2>Enter you text below:</h2>
+<h2>Enter your text below:</h2>
 
 <%= form_for @sample do |f| %>
   <%= f.text_area :content %>
@@ -7,10 +7,18 @@
 
 <% if @response %>
   <br>
-  <%= @response.body %>
-  <h1>yooooooo</h1>
-  <%= @parsed_response %>
-  <h1>yooooooo</h1>
-  <%= @entities  %>
+  <h1>Entities</h1>
+  <% @gendered_entities.each do |entity| %>
+    <ul>
+      <li>Text: <%= entity['text'] %></li>
+      <li>Sentiment score: <%= entity['sentiment']['score'] %></li>
+      <li>Sentiment type: <%= entity['sentiment']['type'] %></li>
+      <li>Gender: <%= entity['gender'] %></li>
+    </ul>
+  <% end %>
+
+  <% @averages.each do |name, average| %>
+    <h1><%= "#{name}: #{average}" %></h1>
+  <% end %>
 
 <% end %>
