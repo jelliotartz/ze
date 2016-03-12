@@ -13,7 +13,6 @@ class SamplesController < ApplicationController
     caller.convert_to_keyword_objects
 
     @keywords = @sample.keywords
-
     calculator = MetricsCalculator.new(@sample.keywords)
     @averages = calculator.return_averages_by_gender
 
