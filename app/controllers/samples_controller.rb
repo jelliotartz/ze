@@ -25,9 +25,9 @@ class SamplesController < ApplicationController
     caller = AlchemyCaller.new(@sample)
     parsed_response = caller.call_API
 
-    @gendered_entities = GenderDetector.transform_all(parsed_response['keywords'])
+    @gendered_keywords = GenderDetector.transform_all(parsed_response['keywords'])
 
-    calculator = MetricsCalculator.new(@gendered_entities)
+    calculator = MetricsCalculator.new(@gendered_keywords)
     @averages = calculator.return_averages_by_gender
 
     render 'new'
