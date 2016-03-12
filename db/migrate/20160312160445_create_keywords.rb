@@ -6,6 +6,7 @@ class CreateKeywords < ActiveRecord::Migration
       t.string :sentiment_type
       t.float :sentiment_score
       t.string :gender
+      t.boolean :active, default: true
       t.timestamps(null: false)
     end
   end

@@ -16,6 +16,9 @@ class SamplesController < ApplicationController
     calculator = MetricsCalculator.new(@sample.keywords)
     @averages = calculator.return_averages_by_gender
 
+    @sample.user_id = session[:user_id]
+    @sample.save
+
     render 'new'
 
 	end
