@@ -29,8 +29,9 @@ ActiveRecord::Schema.define(version: 20160312160445) do
     t.string   "sentiment_type"
     t.float    "sentiment_score"
     t.string   "gender"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.boolean  "active",          default: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "reports", force: :cascade do |t|
