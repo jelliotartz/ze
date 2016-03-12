@@ -1,0 +1,16 @@
+<h2>Enter you text below:</h2>
+
+<%= form_for @sample do |f| %>
+  <%= f.text_area :content %>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<% if @response %>
+  <br>
+  <%= @response.body %>
+  <h1>yooooooo</h1>
+  <%= @parsed_response %>
+  <h1>yooooooo</h1>
+  <%= @entities  %>
+
+<% end %>
