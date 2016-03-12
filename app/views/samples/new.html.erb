@@ -7,6 +7,8 @@
 <% end %>
 
 <div id="output">
+<%= button_to "Tweets", tweets_path   %>
+
 <% if @keywords %>
   <p><%= markup_keywords(@sample).html_safe %></p>
   <br>
