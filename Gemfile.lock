@@ -92,10 +92,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
-<<<<<<< HEAD
     multi_xml (0.5.5)
-=======
->>>>>>> master
     netrc (0.11.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -214,11 +211,8 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails (~> 4.1.0)
-<<<<<<< HEAD
   httparty
-=======
   guess
->>>>>>> master
   jbuilder (~> 2.0)
   jquery-rails
   pg (~> 0.15)
