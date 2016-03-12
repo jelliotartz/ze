@@ -21,32 +21,17 @@ class SamplesController < ApplicationController
 
 
 		@sample = Sample.new(sample_params)
-		text = @sample.content
-  	@response = HTTParty.post("http://access.alchemyapi.com/calls/text/TextGetRankedNamedEntities",
-    :query => { :apikey => ENV['SECRET_ALCHEMY'],
-               :text => text,
-               :outputMode => 'json',
-               :sentiment => 1
-             },
-    :headers => { 'Content-Type' => 'application/x-www-form-urlencoded' } )
 
-    @parsed_response = JSON.parse(@response.body)
-    @gendered_entities = GenderDetector.transform_all(@parsed_response['entities'])
+    caller = AlchemyCaller.new(@sample)
+    parsed_response = caller.call_API
 
+    @gendered_entities = GenderDetector.transform_all(parsed_response['entities'])
 
-    def entities_average(entities)
-      entities.map {|entity| entity['sentiment']['score'].to_f}.reduce(0, :+) / entities.count
-    end
-
-    grouped_entities = @gendered_entities.group_by { |entity| entity['gender'] }
-
-    @averages = grouped_entities.map do |group, entities|
-      [group, entities_average(entities)]
-    end
+    calculator = MetricsCalculator.new(@gendered_entities)
+    @averages = calculator.return_averages_by_gender
 
     render 'new'
 
-    #
 	end
 
 	def new
