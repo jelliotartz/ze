@@ -5,6 +5,21 @@ class SamplesController < ApplicationController
 	end
 
 	def create
+
+=begin
+
+  user puts in text or URL, etc.
+  call to API
+
+  run responses through gender detection
+  run responses through analysis calculator
+
+  render view
+
+=end
+
+
+
 		@sample = Sample.new(sample_params)
 		text = @sample.content
   	@response = HTTParty.post("http://access.alchemyapi.com/calls/text/TextGetRankedNamedEntities",
@@ -16,28 +31,18 @@ class SamplesController < ApplicationController
     :headers => { 'Content-Type' => 'application/x-www-form-urlencoded' } )
 
     @parsed_response = JSON.parse(@response.body)
+    @gendered_entities = GenderDetector.transform_all(@parsed_response['entities'])
 
-    @entity_info = []
 
-    def entity_stuff(parsed_response)
-      @entities = parsed_response['entities']
-      @entities.each do |entity|
-        entity_name = entity['text']
-        entity_sentiment = entity['sentiment']['type']
-        entity_score = entity['sentiment']['score']
-        entity_data = [entity_name, entity_sentiment, entity_score]
-        @entity_info << entity_data
-        p entity_data
-      end
+    def entities_average(entities)
+      entities.map {|entity| entity['sentiment']['score'].to_f}.reduce(0, :+) / entities.count
     end
 
-    entity_stuff(@parsed_response)
-    p @entity_info
+    grouped_entities = @gendered_entities.group_by { |entity| entity['gender'] }
 
-    # @output = @parsed_response['entities'][0]['sentiment']
-    # @clinton_name = @parsed_response['entities'][0]['text']
-    # @clinton_sentiment = @parsed_response['entities'][0]['sentiment']['type']
-    # @clinton_score = @parsed_response['entities'][0]['sentiment']['score']
+    @averages = grouped_entities.map do |group, entities|
+      [group, entities_average(entities)]
+    end
 
     render 'new'
 
