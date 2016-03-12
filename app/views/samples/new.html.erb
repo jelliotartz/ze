@@ -5,15 +5,15 @@
   <%= f.submit "Submit" %>
 <% end %>
 
-<% if @gendered_entities %>
+<% if @keywords %>
   <br>
   <h1>Keywords</h1>
-  <% @gendered_entities.each do |entity| %>
+  <% @keywords.each do |keyword| %>
     <ul>
-      <li>Text: <%= entity['text'] %></li>
-      <li>Sentiment score: <%= entity['sentiment']['score'] %></li>
-      <li>Sentiment type: <%= entity['sentiment']['type'] %></li>
-      <li>Gender: <%= entity['gender'] %></li>
+      <li>Text: <%= keyword.text %></li>
+      <li>Sentiment score: <%= keyword.sentiment_score %></li>
+      <li>Sentiment type: <%= keyword.sentiment_type %></li>
+      <li>Gender: <%= keyword.gender %></li>
     </ul>
   <% end %>
 

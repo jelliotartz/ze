@@ -11,6 +11,18 @@ class AlchemyCaller
                :sentiment => 1
              },
     :headers => { 'Content-Type' => 'application/x-www-form-urlencoded' } )
-    JSON.parse(response.body)
+    @response = JSON.parse(response.body)
+  end
+
+  def convert_to_keyword_objects
+    keywords = @response['keywords']
+    keywords.each do |keyword|
+      @sample.keywords << Keyword.new({
+                                        text: keyword["text"],
+                                        sentiment_type: keyword["sentiment"]["type"],
+                                        sentiment_score: keyword["sentiment"]["score"],
+                                        gender: GenderDetector.detect(keyword["text"]),
+                                      })
+    end
   end
 end
