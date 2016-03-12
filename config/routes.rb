@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update]
 
   resources :samples, except: [:edit, :update]
+  post 'analyze' => 'samples#analyze', as: :analyze
 
   resources :reports, except: [:edit, :update]
 
