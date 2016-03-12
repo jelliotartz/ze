@@ -29,7 +29,8 @@ gem 'rake', '< 11.0'
 gem 'unirest'
 gem 'httparty'
 
-
+gem 'unirest'
+gem 'guess'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
