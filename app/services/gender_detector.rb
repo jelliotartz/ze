@@ -8,8 +8,8 @@
 
 module GenderDetector
 
-  @male_words = ["actor", "boy", "boyfriend", "boyfriends", "boys", "brother", "brothers", "chairman", "dad", "dads", "dude", "father", "fathers", "fiance", "gentleman", "gentlemen", "god", "grandfather", "grandpa", "grandson", "groom", "guy", "he", "he's", "him", "himself", "his", "husband", "husbands", "king", "male", "man", "men", "men's", "mr", "nephew", "nephews", "priest", "prince", "son", "sons", "spokesman", "uncle", "uncles", "waiter", "widower", "widowers"]
-  @female_words = ["actor", "actress", "aunt", "aunts", "bride", "chairwoman", "daughter", "daughters", "female", "fiancee", "girl", "girlfriend", "girlfriends", "girls", "goddess", "granddaughter", "grandma", "grandmother", "her", "heroine", "herself", "ladies", "lady", "lady", "mom", "moms", "mother", "mothers", "mrs", "ms", "niece", "nieces", "priestess", "princess", "queens", "she", "she's", "sister", "sisters", "spokeswoman", "waitress", "widow", "widows", "wife", "wives", "woman", "women", "women's"]
+  @male_words = [/actor/, /boy/, /boyfriend/, /boyfriends/, /boys/, /brother/, /brothers/, /chairman/, /dad/, /dads/, /dude/, /father/, /fathers/, /fiance/, /gentleman/, /gentlemen/, /god/, /grandfather/, /grandpa/, /grandson/, /groom/, /guy/, /he/, /he's/, /him/, /himself/, /his/, /husband/, /husbands/, /king/, /male/, /man/, /men/, /men's/, /mr/, /nephew/, /nephews/, /priest/, /prince/, /son/, /sons/, /spokesman/, /uncle/, /uncles/, /waiter/, /widower/, /widowers/]
+  @female_words = [/actor/, /actress/, /aunt/, /aunts/, /bride/, /chairwoman/, /daughter/, /daughters/, /female/, /fiancee/, /girl/, /girlfriend/, /girlfriends/, /girls/, /goddess/, /granddaughter/, /grandma/, /grandmother/, /her/, /heroine/, /herself/, /ladies/, /lady/, /lady/, /mom/, /moms/, /mother/, /mothers/, /mrs/, /ms/, /niece/, /nieces/, /priestess/, /princess/, /queens/, /she/, /she's/, /sister/, /sisters/, /spokeswoman/, /waitress/, /widow/, /widows/, /wife/, /wives/, /woman/, /women/, /women's/]
 
 
   def self.transform(keywords_hash)
@@ -30,10 +30,14 @@ module GenderDetector
     end
   end
 
+  def self.matches?(regex_list, text)
+    regex_list.any? { |regex| regex.match(text) }
+  end
+
   def self.detect_word(text)
 
-    in_male = @male_words.include?(text)
-    in_female = @female_words.include?(text)
+    in_male = self.matches?(@male_words, text)
+    in_female = self.matches?(@female_words, text)
 
     if in_female && in_male
       "unisex"
