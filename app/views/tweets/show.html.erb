@@ -1,1 +1,6 @@
-<%= @tweet %>
+<% @tweet_objects.each do |tweet| %>
+  <li> <%= tweet.text  %> </li>
+<% end %>
+
+
+

@@ -1,6 +1,8 @@
 <h1>Analyze tweets</h1>
 
-<%= form_for @sample do |f| %>
-  <%= f.text_area :content %>
-  <%= f.submit "Submit" %>
-<% end %>
+<form action="/tweets/get_username" method="GET">
+  <label>Username:</label>
+  <input type="text" name="username">
+  <input type="submit">
+</form>
+
