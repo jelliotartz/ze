@@ -6,29 +6,18 @@ class SamplesController < ApplicationController
 
 	def create
 
-=begin
-
-  user puts in text or URL, etc.
-  call to API
-
-  run responses through gender detection
-  run responses through analysis calculator
-
-  render view
-
-=end
-
-
-
 		@sample = Sample.new(sample_params)
 
     caller = AlchemyCaller.new(@sample)
-    parsed_response = caller.call_API
+    caller.call_API
+    caller.convert_to_keyword_objects
 
-    @gendered_keywords = GenderDetector.transform_all(parsed_response['keywords'])
-
-    calculator = MetricsCalculator.new(@gendered_keywords)
+    @keywords = @sample.keywords
+    calculator = MetricsCalculator.new(@sample.keywords)
     @averages = calculator.return_averages_by_gender
+
+    @sample.user_id = session[:user_id]
+    @sample.save
 
     render 'new'
 
