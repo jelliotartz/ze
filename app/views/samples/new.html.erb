@@ -5,9 +5,9 @@
   <%= f.submit "Submit" %>
 <% end %>
 
-<% if @response %>
+<% if @gendered_entities %>
   <br>
-  <h1>Entities</h1>
+  <h1>Keywords</h1>
   <% @gendered_entities.each do |entity| %>
     <ul>
       <li>Text: <%= entity['text'] %></li>
@@ -18,7 +18,7 @@
   <% end %>
 
   <% @averages.each do |name, average| %>
-    <h1><%= "#{name}: #{average}" %></h1>
+    <h3><%= "#{name}: #{average}" %></h3>
   <% end %>
 
 <% end %>
