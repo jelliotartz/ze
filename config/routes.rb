@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
   resources :reports, except: [:edit, :update]
 
-
   resources :users
+
+  resources :tweets
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
