@@ -5,12 +5,18 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update]
 
   resources :samples, except: [:edit, :update]
+  post 'analyze' => 'samples#analyze', as: :analyze
 
   resources :reports, except: [:edit, :update]
 
-
   resources :users
 
+<<<<<<< HEAD
+=======
+  resources :tweets
+
+  get '/tweets/get_username' => 'tweets#get_username'
+>>>>>>> master
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

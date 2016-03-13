@@ -1,25 +1,30 @@
 <h2>Enter your text below:</h2>
 
-<%= form_for @sample do |f| %>
+<%= form_for :sample, url: analyze_path do |f| %>
   <%= f.text_area :content %>
+  <%= f.submit "Clear", type: :reset %>
   <%= f.submit "Submit" %>
 <% end %>
+
+<%= button_to "Tweets", tweets_path   %>
+<div id="output">
 
 <% if @keywords %>
   <p><%= markup_keywords(@sample).html_safe %></p>
   <br>
-  <h1>Keywords</h1>
-  <% @keywords.each do |keyword| %>
-    <ul>
-      <li>Text: <%= keyword.text %></li>
-      <li>Sentiment score: <%= keyword.sentiment_score %></li>
-      <li>Sentiment type: <%= keyword.sentiment_type %></li>
-      <li>Gender: <%= keyword.gender %></li>
-    </ul>
-  <% end %>
+
 
   <% @averages.each do |name, average| %>
     <h3><%= "#{name}: #{average}" %></h3>
   <% end %>
 
+  <%= link_to "Reset", "", class: "button" %>
+
+  <% if current_user %>
+    <%= link_to "Save this sample", user_path(current_user), method: :get %>
+    <%= link_to "Discard this sample", sample_path(@sample), method: :delete %>
+  <% end %>
+
 <% end %>
+
+</div>

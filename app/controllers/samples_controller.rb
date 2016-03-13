@@ -4,7 +4,7 @@ class SamplesController < ApplicationController
 	def index
 	end
 
-	def create
+	def analyze
 
 		@sample = Sample.new(sample_params)
 
@@ -23,14 +23,25 @@ class SamplesController < ApplicationController
 
 	end
 
+  def create
+    puts @sample.text
+  end
+
 	def new
-		@sample = Sample.new
 	end
 
 	def show
 	end
 
 	def destroy
+    @sample = Sample.find(params[:id])
+    @sample.destroy
+    @sample.keywords.destroy_all
+    if current_user
+      redirect_to user_path(current_user.id)
+    else
+      redirect_to root_path
+    end
 	end
 
 	private
