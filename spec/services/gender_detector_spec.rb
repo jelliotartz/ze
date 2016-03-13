@@ -39,6 +39,10 @@ describe GenderDetector do
       expect(GenderDetector.detect_word(unisex_text)).to eq ("unisex")
     end
 
+    it "detects basic pluralization" do
+      expect(GenderDetector.detect_word("boys")).to eq("male")
+    end
+
   end
 
   describe "#detect_name" do
