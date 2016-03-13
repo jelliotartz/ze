@@ -7,7 +7,28 @@ class UsersController < ApplicationController
   
   def search
     user = User.find(session[:user_id])
-    @k = user.samples
+    query = params[:query]
+    @u = []
+    key_matches = []
+    user.samples.each do |sample| 
+      if sample.keywords.any?
+        sample.keywords.each do |keyword|
+          key_matches << keyword
+        end
+      end
+    end
+    @key_matches = key_matches.select {|key| key.text.match(/(#{query})/)}
+    @key_matches.each {|key| @u << key.sample}
+    @u.uniq!
+    @frequency = Hash.new(0)
+    @key_matches.each do |key| 
+      sample_data = key.sample.content.split(" ")
+      sample_data.each do |word|
+        if word == key.text.split(" ")[0]
+          @frequency[key.text] += 1
+        end
+      end
+    end
   end
 
   def show
