@@ -1,9 +1,85 @@
 require 'csv'
-require_relative 'gender_detector_assets/male_words'
-require_relative 'gender_detector_assets/female_words'
+# require_relative 'gender_detector_assets/male_words'
+# require_relative 'gender_detector_assets/female_words'
 
 module GenderDetector
 
+FEMALE_WORDS=[
+/\bactor\b/,
+/\bactress(es)?\b/,
+/\baunts?\b/,
+/\bbrides?\b/,
+/\bchairwoman\b/,
+/\bdaughters?\b/,
+/\bfemales?\b/,
+/\bfiancees?\b/,
+/\bgirls?\b/,
+/\bgirlfriends?\b/,
+/\bgoddess(es)?\b/,
+/\bgranddaughters?\b/,
+/\bgrandmas?\b/,
+/\bgrandmothers?\b/,
+/\bhers?\b/,
+/\bheroines?\b/,
+/\bherself\b/,
+/\bladies\b/,
+/\blady\b/,
+/\bmoms?\b/,
+/\bmothers?\b/,
+/\bmrs\b/,
+/\bms\b/,
+/\bnieces?\b/,
+/\bpriestess(es)?\b/,
+/\bprincess(es)?\b/,
+/\bqueens?\b/,
+/\bshe\b/,
+/\bsisters?\b/,
+/\bspokeswoman\b/,
+/\bwaitress(es)?\b/,
+/\bwidows?\b/,
+/\bwife\b/,
+/\bwives\b/,
+/\bwoman\b/,
+/\bwomen\b/,
+]
+
+MALE_WORDS = [
+/\bactors?\b/,
+/\bboys?\b/,
+/\bboyfriends?\b/,
+/\bbrothers?\b/,
+/\bchairman\b/,
+/\bchairmen\b/,
+/\bdads?\b/,
+/\bdudes?\b/,
+/\bfathers?\b/,
+/\bfiances?\b/,
+/\bgentleman\b/,
+/\bgentlemen\b/,
+/\bgrandfathers?\b/,
+/\bgrandpas?\b/,
+/\bgrandsons?\b/,
+/\bgrooms?\b/,
+/\bguys?\b/,
+/\bhe\b/,
+/\bhim\b/,
+/\bhimself\b/,
+/\bhis\b/,
+/\bhusbands?\b/,
+/\bkings?\b/,
+/\bmales?\b/,
+/\bman\b/,
+/\bmen\b/,
+/\bmr\b/,
+/\bnephews?\b/,
+/\bpriests?\b/,
+/\bprinces?\b/,
+/\bsons?\b/,
+/\bspokesman\b/,
+/\buncles?\b/,
+/\bwaiters?\b/,
+/\bwidowers?\b/,
+]
 
   def self.transform(keywords_hash)
     keywords_hash["gender"] = self.detect(keywords_hash["text"])

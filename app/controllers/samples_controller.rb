@@ -1,12 +1,12 @@
 class SamplesController < ApplicationController
-	require 'pry'
+  require 'pry'
 
-	def index
-	end
+  def index
+  end
 
-	def analyze
+  def analyze
 
-		@sample = Sample.new(sample_params)
+    @sample = Sample.new(sample_params)
 
     caller = AlchemyCaller.new(@sample)
     caller.call_API
@@ -19,21 +19,21 @@ class SamplesController < ApplicationController
     @sample.user_id = session[:user_id]
     @sample.save
 
-    render 'new'
+    render json: { sample: @sample, keywords: @keywords }
 
-	end
+  end
 
   def create
     puts @sample.text
   end
 
-	def new
-	end
+  def new
+  end
 
-	def show
-	end
+  def show
+  end
 
-	def destroy
+  def destroy
     @sample = Sample.find(params[:id])
     @sample.destroy
     @sample.keywords.destroy_all
@@ -42,10 +42,10 @@ class SamplesController < ApplicationController
     else
       redirect_to root_path
     end
-	end
+  end
 
-	private
-	def sample_params
-		params.require(:sample).permit(:content)
-	end
+  private
+  def sample_params
+    params.require(:sample).permit(:content)
+  end
 end
