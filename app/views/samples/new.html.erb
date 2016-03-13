@@ -5,7 +5,12 @@
   <%= f.submit "Submit" %>
 <% end %>
 
-<%= button_to "Tweets", tweets_path   %>
+Enter a twitter handle:
+<form action="/samples/get_username" method="get">
+  <label>Username:</label>
+  <input type="text" name="username">
+  <input type="submit">
+</form>
 <div id="output">
 
 <% if @keywords %>

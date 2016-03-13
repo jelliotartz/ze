@@ -4,6 +4,13 @@ class SamplesController < ApplicationController
   def index
   end
 
+  def show
+    tweeter = TwitterScraper.new
+    @tweet_objects = tweeter.user_timeline_20_recent(params[:username])
+
+    @string_of_tweets = tweeter.concatenate_tweets(@tweet_objects)
+  end
+
   def analyze
 
     @sample = Sample.new(sample_params)
@@ -27,10 +34,17 @@ class SamplesController < ApplicationController
     puts @sample.text
   end
 
-  def new
+  def get_username
+    p "*" * 100
+    p "*" * 100
+    p params
+    tweeter = TwitterScraper.new
+    @tweet_objects = tweeter.user_timeline_20_recent(params[:username])
+
+    @string_of_tweets = tweeter.concatenate_tweets(@tweet_objects)
   end
 
-  def show
+  def new
   end
 
   def destroy

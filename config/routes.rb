@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get '/users/search' => 'users#search'
-  
+
   resources :users, only: [:new, :create, :edit, :update]
 
   resources :samples, except: [:edit, :update]
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :tweets
 
   get '/tweets/get_username' => 'tweets#get_username'
+  get '/samples/get_username' => 'samples#get_username'
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
