@@ -23,9 +23,9 @@ class SamplesController < ApplicationController
 
 	end
 
-  def create
-    puts @sample.text
-  end
+	def create
+		puts @sample.text
+	end
 
 	def new
 	end
@@ -34,14 +34,14 @@ class SamplesController < ApplicationController
 	end
 
 	def destroy
-    @sample = Sample.find(params[:id])
-    @sample.destroy
-    @sample.keywords.destroy_all
-    if current_user
-      redirect_to user_path(current_user.id)
-    else
-      redirect_to root_path
-    end
+		@sample = Sample.find(params[:id])
+		@sample.destroy
+		@sample.keywords.destroy_all
+		if current_user
+			redirect_to user_path(current_user.id)
+		else
+			redirect_to root_path
+		end
 	end
 
 	private

@@ -8,8 +8,10 @@ class UsersController < ApplicationController
   def search
     user = User.find(session[:user_id])
     query = params[:query]
-    @u = []
+    @sample_matches = [] # rename u 
     key_matches = []
+    @frequency = Hash.new(0)
+
     user.samples.each do |sample| 
       if sample.keywords.any?
         sample.keywords.each do |keyword|
@@ -17,10 +19,11 @@ class UsersController < ApplicationController
         end
       end
     end
+
     @key_matches = key_matches.select {|key| key.text.match(/(#{query})/)}
-    @key_matches.each {|key| @u << key.sample}
-    @u.uniq!
-    @frequency = Hash.new(0)
+    @key_matches.each {|key| @sample_matches << key.sample}
+    @sample_matches.uniq!
+    
     @key_matches.each do |key| 
       sample_data = key.sample.content.split(" ")
       sample_data.each do |word|
@@ -29,6 +32,7 @@ class UsersController < ApplicationController
         end
       end
     end
+    # returns @frequency hash, @sample_matches array of matched samples to keys, and @key_matches to the user's query
   end
 
   def show

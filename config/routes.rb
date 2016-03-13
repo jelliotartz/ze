@@ -11,12 +11,9 @@ Rails.application.routes.draw do
 
   resources :users
 
-<<<<<<< HEAD
-=======
   resources :tweets
 
   get '/tweets/get_username' => 'tweets#get_username'
->>>>>>> master
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
