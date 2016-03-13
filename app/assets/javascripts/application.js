@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require d3
 //= require jquery.highlight.js
 //= require_tree .
