@@ -50,29 +50,51 @@ $(document).ready(function(){
       .attr("r", 15)
       .style("fill", function(d) { return colorFromGender(d.gender) })
 
-    var text = svgContainer.selectAll("text")
-                            .data(sample.keywords)
-                            .enter()
-                            .append("text");
+      .on("mouseover", function() {return tooltip.style("visibility", "visible");})
+      .on("mousemove", function() {return tooltip.style("top", (d3.event.pageY-10)+"px").style("left", (d3.event.pageX+10)+"px").text(d3.event.currentTarget.__data__.text);})
+      .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+
+
+    // var text = svgContainer.selectAll("text")
+    //   .data(sample.keywords)
+    //   .enter()
+    //   .append("text");
+
+    var tooltip = d3.select("body")
+      .append("div")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
 
     //Add SVG Text Element Attributes
-    var textLabels = text
-                     .attr("x", function(d) { return linearScale(d.sentiment_score) })
-                     .attr("y", 45)
-                     .text(function(d) { return d.text })
-                     .attr("font-family", "sans-serif")
-                     .attr("font-size", "20px")
-                     .attr("fill", "black")
-                     .style("text-anchor", "middle");
+    // var textLabels = text
+    //   .attr("x", function(d) { return linearScale(d.sentiment_score) })
+    //   .attr("y", 45)
+    //   .text(function(d) { return d.text })
+    //   .attr("font-family", "sans-serif")
+    //   .attr("font-size", "20px")
+    //   .attr("fill", "black")
+    //   .style("text-anchor", "middle")
+
+
+
+
+        // d3.select(this)
+        // .enter()
+        // .append("text")
+        // .text(function(d) { return d.text })
+        // .attr("x", function(d) {return x(d.x);})
+        // .attr("y", function(d) {return y(d.y);})
+      // });
 
       // .on("mouseover", function(d) {
       //   d3.select()
       // })
-      // .text(function(d) { return d.text })
 
     var xAxisGroup = svgContainer.append("g")
-                                .attr("transform", "translate(0, 100)")
-                                .call(xAxis);
+      .attr("transform", "translate(0, 100)")
+      .call(xAxis);
   }
 
   function colorFromGender(gender) {
