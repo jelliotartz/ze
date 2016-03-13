@@ -1,29 +1,15 @@
 <h2>Enter your text below:</h2>
 
-<%= form_for :sample, {url: analyze_path, remote: true, html: { id: "content-input" } } do |f| %>
+<%= form_for :sample, {url: analyze_path, remote: true, html: { class: "content-input" } } do |f| %>
   <%= f.text_area :content %>
   <%= f.submit "Submit" %>
 <% end %>
 
-<%= button_to "Tweets", tweets_path   %>
-<div id="output">
-
-<% if @keywords %>
-  <p><%= markup_keywords(@sample).html_safe %></p>
-  <br>
-
-
-  <% @averages.each do |name, average| %>
-    <h3><%= "#{name}: #{average}" %></h3>
-  <% end %>
-
-  <%= link_to "Reset", "", class: "button" %>
-
-  <% if current_user %>
-    <%= link_to "Save this sample", user_path(current_user), method: :get %>
-    <%= link_to "Discard this sample", sample_path(@sample), method: :delete %>
-  <% end %>
-
+<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input" } } do |f| %>
+  <%= f.label "Enter a twitter handle"  %>
+  <%= f.text_field :content %>
+  <%= f.submit "Submit" %>
 <% end %>
 
+<div id="output">
 </div>

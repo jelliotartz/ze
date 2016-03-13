@@ -8,7 +8,7 @@ $(document).ready(function(){
     $("input[type=text], textarea").val("");
   });
 
-  $("#content-input").on("ajax:success",function(event, data) {
+  $(".content-input").on("ajax:success",function(event, data) {
     event.preventDefault();
     var sample = new Sample(data.sample);
     var keywords = data.keywords.map(function(keyword) { return new Keyword(keyword) })

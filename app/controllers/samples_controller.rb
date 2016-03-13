@@ -4,9 +4,19 @@ class SamplesController < ApplicationController
   def index
   end
 
-  def analyze
+  def input_text
+  end
 
-    @sample = Sample.new(sample_params)
+  def analyze
+    if params[:tweet]
+      tweeter = TwitterScraper.new
+      tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
+      string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
+      @sample = Sample.new({content: string_of_tweets})
+    else
+      # just create sample
+      @sample = Sample.new(sample_params)
+    end
 
     caller = AlchemyCaller.new(@sample)
     caller.call_API
@@ -27,10 +37,8 @@ class SamplesController < ApplicationController
     puts @sample.text
   end
 
-  def new
-  end
 
-  def show
+  def new
   end
 
   def destroy
