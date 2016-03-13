@@ -19,8 +19,17 @@ class SamplesController < ApplicationController
     analyze(@sample)
   end
 
-  def analyze(sample)
-    @sample = sample
+  def analyze
+    if params[:tweet]
+      tweeter = TwitterScraper.new
+      tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
+      string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
+      @sample = Sample.new({content: string_of_tweets})
+    else
+      # just create sample
+      @sample = Sample.new(sample_params)
+    end
+
     caller = AlchemyCaller.new(@sample)
     caller.call_API
     caller.convert_to_keyword_objects
@@ -40,15 +49,6 @@ class SamplesController < ApplicationController
     puts @sample.text
   end
 
-  def get_username
-    p "*" * 100
-    p "*" * 100
-    p params
-    tweeter = TwitterScraper.new
-    @tweet_objects = tweeter.user_timeline_20_recent(params[:username])
-
-    @string_of_tweets = tweeter.concatenate_tweets(@tweet_objects)
-  end
 
   def new
   end
