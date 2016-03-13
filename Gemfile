@@ -32,6 +32,8 @@ gem 'httparty'
 gem 'twitter'
 
 gem 'guess'
+gem "d3-rails"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
