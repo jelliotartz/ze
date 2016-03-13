@@ -1,15 +1,8 @@
-# refactors...
-# 1. incorporate in larger pipeline
-  # write a method that takes json objects and adds gender as a property for each one
-# 2. make detect_word based on regex
-# 3. return gender percentages along with the outcome gender
-# 4. find a better gender or additional api?
-
+require 'csv'
+require_relative 'gender_detector_assets/male_words'
+require_relative 'gender_detector_assets/female_words'
 
 module GenderDetector
-
-  @male_words = [/actor/, /boy/, /boyfriend/, /boyfriends/, /boys/, /brother/, /brothers/, /chairman/, /dad/, /dads/, /dude/, /father/, /fathers/, /fiance/, /gentleman/, /gentlemen/, /god/, /grandfather/, /grandpa/, /grandson/, /groom/, /guy/, /he/, /he's/, /him/, /himself/, /his/, /husband/, /husbands/, /king/, /male/, /man/, /men/, /men's/, /mr/, /nephew/, /nephews/, /priest/, /prince/, /son/, /sons/, /spokesman/, /uncle/, /uncles/, /waiter/, /widower/, /widowers/]
-  @female_words = [/actor/, /actress/, /aunt/, /aunts/, /bride/, /chairwoman/, /daughter/, /daughters/, /female/, /fiancee/, /girl/, /girlfriend/, /girlfriends/, /girls/, /goddess/, /granddaughter/, /grandma/, /grandmother/, /her/, /heroine/, /herself/, /ladies/, /lady/, /lady/, /mom/, /moms/, /mother/, /mothers/, /mrs/, /ms/, /niece/, /nieces/, /priestess/, /princess/, /queens/, /she/, /she's/, /sister/, /sisters/, /spokeswoman/, /waitress/, /widow/, /widows/, /wife/, /wives/, /woman/, /women/, /women's/]
 
 
   def self.transform(keywords_hash)
@@ -36,8 +29,8 @@ module GenderDetector
 
   def self.detect_word(text)
 
-    in_male = self.matches?(@male_words, text)
-    in_female = self.matches?(@female_words, text)
+    in_male = self.matches?(MALE_WORDS, text.downcase)
+    in_female = self.matches?(FEMALE_WORDS, text.downcase)
 
     if in_female && in_male
       "unisex"
