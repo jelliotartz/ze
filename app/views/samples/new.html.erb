@@ -1,8 +1,7 @@
 <h2>Enter your text below:</h2>
 
-<%= form_for :sample, url: analyze_path do |f| %>
+<%= form_for :sample, {url: analyze_path, remote: true, html: { id: "content-input" } } do |f| %>
   <%= f.text_area :content %>
-  <%= f.submit "Clear", type: :reset %>
   <%= f.submit "Submit" %>
 <% end %>
 
