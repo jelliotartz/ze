@@ -19,7 +19,7 @@ $(document).ready(function(){
     var contentHtml = $("<div>" + sample.content + "</div>");
 
     keywords.forEach(function(keyword) {
-      contentHtml.highlight(keyword.text, { element: 'span', className: keyword.gender + " keyword " + keyword.sentiment_type })
+      contentHtml.highlight(keyword.text, { element: 'span', className: keyword.gender + " keyword " + keyword.sentiment_type, data: { sentiment_score: keyword.sentiment_score } })
     })
     return contentHtml;
   }
