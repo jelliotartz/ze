@@ -7,18 +7,6 @@ class SamplesController < ApplicationController
   def input_text
   end
 
-  def show
-    tweeter = TwitterScraper.new
-    @tweet_objects = tweeter.user_timeline_20_recent(params[:username])
-
-    @string_of_tweets = tweeter.concatenate_tweets(@tweet_objects)
-    # params[:sample][:content] = @string_of_tweets
-    # redirect_to analyze_path
-    @sample = Sample.new({content: @string_of_tweets})
-
-    analyze(@sample)
-  end
-
   def analyze
     if params[:tweet]
       tweeter = TwitterScraper.new
