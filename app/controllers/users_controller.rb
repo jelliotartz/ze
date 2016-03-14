@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   
   def search
     user = User.find(session[:user_id])
-    query = params[:query].downcase!
+    query = params[:query].downcase
     @sample_matches = []  
     key_matches = []
     @frequency = Hash.new(0)
