@@ -2,7 +2,8 @@ $(document).ready(function(){
 
   $(".content-input").on("ajax:success",function(event, data) {
     this.reset(); // reset form
-
+    $("#output").off("click",".keyword")
+    $("body").off("click", ".keyword-popup input")
     // create sample and keywords
     var sample = new Sample(data.sample);
     var keywords = data.keywords.map(function(keyword) { return new Keyword(keyword) })
@@ -11,7 +12,8 @@ $(document).ready(function(){
     // render views
     var view = new SampleView(sample);
     view.displayHighlightedContent();
-    view.showStatistics(data.averages);
+    view.showStatistics();
     view.createNumberLine();
-  })
+    view.bindPopups();
+  });
 })

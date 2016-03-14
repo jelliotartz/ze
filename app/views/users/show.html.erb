@@ -12,6 +12,11 @@
 	<input name="query" placeholder="search keywords">
 </form>
 
+<%= link_to("Generate sample scatter", user_path(@user), remote: true, "data-type" => "json", id: "scatter-link")  %>
+
+<div id="scatter">
+</div>
+
 <ul>
 	<% @user.samples.each do |sample| %>
 

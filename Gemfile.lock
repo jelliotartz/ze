@@ -71,8 +71,12 @@ GEM
     docile (1.1.5)
     domain_name (0.5.20160309)
       unf (>= 0.0.5, < 1.0.0)
+<<<<<<< HEAD
     dropzonejs-rails (0.7.3)
       rails (> 3.1)
+=======
+    ejs (1.1.1)
+>>>>>>> master
     equalizer (0.0.10)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -248,7 +252,11 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   d3-rails
+<<<<<<< HEAD
   dropzonejs-rails
+=======
+  ejs
+>>>>>>> master
   guess
   httparty
   jbuilder (~> 2.0)

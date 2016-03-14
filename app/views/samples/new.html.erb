@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
 
-<h2>Enter your text below:</h2>
+<h2 class="new-sample-title">Enter your text</h2>
 
 <ul id="toggle-form">
 	<li><a href="#text_form">Text Sample</a></li>
@@ -9,17 +9,19 @@
 </ul>
 
 <div id="text_form">
-	<%= form_for :sample, {url: analyze_path, remote: true, html: { class: "content-input" } } do |f| %>
-	<%= f.text_area :content %>
-	<%= f.submit "Submit" %>
-	<% end %>
+	<%= form_for :sample, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
+  <%= f.text_area :content %>
+  <br>
+  <%= f.submit "Enter your text!" %>
+<% end %>
 </div>
 
 <div id="twitter_form">
-	<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input" } } do |f| %>
-	<%= f.label "Enter a twitter handle"  %>
-	<%= f.text_field :content %>
-	<%= f.submit "Submit" %>
+	<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
+  <%= f.text_field :content %>
+  <br>
+  <%= f.submit "Enter a twitter handle!", :class => 'twitter-submit-button' %>
+<% end %>
 	<% end %>
 </div>
 
