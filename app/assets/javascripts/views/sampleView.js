@@ -87,7 +87,6 @@ SampleView.prototype.bindPopups = function() {
     var x = $(this).offset().left;
     var y = $(this).offset().top - 50;
     $("body").append(popup);
-    debugger
     popup.css({
                 "position":"absolute",
                 "top": y, "left": x,

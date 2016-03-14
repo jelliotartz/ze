@@ -1,4 +1,5 @@
 function Sample(sample_details) {
+  this.id = sample_details["id"];
   this.name = sample_details["name"];
   this.description = sample_details["description"];
   this.content = sample_details["content"];
