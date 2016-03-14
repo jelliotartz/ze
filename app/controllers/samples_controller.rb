@@ -29,10 +29,6 @@ class SamplesController < ApplicationController
     @sample.user_id = session[:user_id]
     @sample.save
 
-    puts @sample
-    puts @keywords
-    puts @averages
-    
     render json: { sample: @sample, keywords: @keywords, averages: @averages }
 
   end
