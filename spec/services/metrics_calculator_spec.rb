@@ -17,32 +17,32 @@ describe "#keywords_average" do
 end
 
 describe "#return_averages_by_gender" do
-  it "returns an array of averages" do
-    expect(calculator.return_averages_by_gender).to be_kind_of(Array)
+  it "returns a hash of averages" do
+    expect(calculator.return_averages_by_gender).to be_kind_of(Hash)
   end
 
   it "contains the average female sentiment" do
-    expect(calculator.return_averages_by_gender[0][0]).to eq("female")
+    expect(calculator.return_averages_by_gender.key?("female")).to be true
   end
 
   it "calulates the average female sentiment" do
-    expect(calculator.return_averages_by_gender[0][1]).to eq(-0.6)
+    expect(calculator.return_averages_by_gender["female"]).to eq(-0.6)
   end
 
   it "contains the average male sentiment" do
-    expect(calculator.return_averages_by_gender[1][0]).to eq("male")
+    expect(calculator.return_averages_by_gender.key?("male")).to be true
   end
 
   it "calulates the average male sentiment" do
-    expect(calculator.return_averages_by_gender[1][1]).to eq(-0.2)
+    expect(calculator.return_averages_by_gender["male"]).to eq(-0.2)
   end
 
   it "contains the average neutral sentiment" do
-    expect(calculator.return_averages_by_gender[2][0]).to eq("neutral")
+    expect(calculator.return_averages_by_gender.key?("neutral")).to be true
   end
 
   it "calulates the average neutral sentiment" do
-    expect(calculator.return_averages_by_gender[2][1]).to eq(0.5)
+    expect(calculator.return_averages_by_gender["neutral"]).to eq(0.5)
   end
 
 end
