@@ -248,11 +248,8 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   d3-rails
-<<<<<<< HEAD
   dropzonejs-rails
-=======
   ejs
->>>>>>> master
   guess
   httparty
   jbuilder (~> 2.0)
