@@ -8,6 +8,10 @@ class SamplesController < ApplicationController
   end
 
   def analyze
+    if request.xhr?
+      a = params
+      binding.pry
+    end
     if params[:tweet]
       tweeter = TwitterScraper.new
       tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
