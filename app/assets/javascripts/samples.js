@@ -8,7 +8,52 @@ $(document).ready(function(){
     $("input[type=text], textarea").val("");
   });
 
+  // $('[name="image[filename]"]').on('change', prepareUpload);
+
+  // function prepareUpload(event)
+  // {
+  //   console.log("preparing")
+  //   files = event.target.files;
+  //   image_file = files[0]
+  //   console.log(image_file)
+  // }
+
+  // $("#image_submit").on("submit", function(event) {
+  //   event.preventDefault()
+  //   // var filename = $('input[type=file]').val().split('\\').pop();
+  //   // console.log(filename)
+  //   $.each(data.files, function(key, value)
+  //   {
+  //     formData = formData + '&filenames[]=' + value;
+  //   });
+
+  //   $.ajax({
+  //     method: 'post',
+  //     url: '/analyze',
+  //     data: {image: formData}
+  //     })
+
+  //   })
+$(".content-input").on('submit', function(e){
+  console.log('there')
+})
+
+$(".content-input").on("ajax:remotipartComplete", function(e, data){
+  console.log('succes')
+
+});
+
+$(".content-input").bind("ajax:success", function(){
+  if ( $(this).data('remotipartSubmitted') )
+    console.log('succesfuler')
+});
+
+$(".content-input").on("ajax:remotipartComplete", function(e, data){
+  console.log(e, data)
+});
+
   $(".content-input").on("ajax:success",function(event, data) {
+    console.log("in the ajax")
     event.preventDefault();
     var sample = new Sample(data.sample);
     var keywords = data.keywords.map(function(keyword) { return new Keyword(keyword) })

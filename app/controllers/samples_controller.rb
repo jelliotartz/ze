@@ -8,7 +8,31 @@ class SamplesController < ApplicationController
   end
 
   def analyze
-    if params[:tweet]
+    puts params
+    puts "*" * 100
+    puts "*" * 100
+    puts "*" * 100
+    puts "*" * 100
+    if params[:image]
+      engine = Tesseract::Engine.new do |config|
+        config.language  = :eng
+        config.blacklist = '|'
+      end
+      def clean(text)
+        text.split(/\n/).compact.select { |v| v.size > 0 }
+      end
+      if remotipart_submitted?
+        new_image = params[:image][:filename].path
+        p new_image
+      else
+        p "NOT XHR!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        new_image =  params[:image][:filename].path
+        p new_image
+      end
+      p "AT THE END OF IMAGE SECTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      text_from_image = clean(engine.text_for(new_image))
+      @sample = Sample.new({content: text_from_image})
+    elsif params[:tweet]
       tweeter = TwitterScraper.new
       tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
       string_of_tweets = tweeter.concatenate_tweets(tweet_objects)

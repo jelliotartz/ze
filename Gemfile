@@ -32,7 +32,9 @@ gem 'httparty'
 gem 'twitter'
 
 gem 'guess'
-gem "d3-rails"
+gem 'd3-rails'
+gem 'tesseract-ocr'
+gem 'remotipart'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
