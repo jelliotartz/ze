@@ -12,7 +12,7 @@ SampleView.prototype.wrapSampleContent = function() {
   var contentHtml = $("<div>" + this.sample.content + "</div>");
 
   keywords.forEach(function(keyword) {
-    contentHtml.highlight(keyword.text, { element: 'span', className: keyword.gender + " keyword " + keyword.sentiment_type, data: { sentiment_score: keyword.sentiment_score } })
+    contentHtml.highlight(keyword.text, { wordsOnly: true, element: 'span', className: keyword.gender + " keyword " + keyword.sentiment_type, data: { sentiment_score: keyword.sentiment_score } })
   })
   return contentHtml;
 };
@@ -87,6 +87,7 @@ SampleView.prototype.bindPopups = function() {
     var x = $(this).offset().left;
     var y = $(this).offset().top - 50;
     $("body").append(popup);
+    debugger
     popup.css({
                 "position":"absolute",
                 "top": y, "left": x,
