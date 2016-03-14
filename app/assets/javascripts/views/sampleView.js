@@ -32,7 +32,10 @@ SampleView.prototype.generateAverageView = function(averages) {
 
 SampleView.prototype.createNumberLine = function(sample) {
 
-  var svgContainer = d3.select("#output").append("svg").attr("width", 500).attr("height", 500);
+  var svgContainer = d3.select("#output")
+                       .append("svg")
+                       .attr("width", 500)
+                       .attr("height", 500);
 
   var linearScale = d3.scale.linear()
                       .domain([-1,1])
@@ -41,32 +44,44 @@ SampleView.prototype.createNumberLine = function(sample) {
   var xAxis = d3.svg.axis()
                     .scale(linearScale);
 
-
+  var genderedKeywords = this.sample.keywords.filter(function(keyword) {
+    return keyword.gender !== "neutral";
+  })         
 
   var circles = svgContainer.selectAll("circle")
-    .data(this.sample.keywords)
+    .data(genderedKeywords)
     .enter()
     .append("circle")
     .attr("cx", function(d) { return linearScale(d.sentiment_score) })
     .attr("cy", 70)
     .attr("r", 15)
     .style("fill", function(d) { return colorFromGender(d.gender) })
-
     .on("mouseover", function() {return tooltip.style("visibility", "visible");})
-    .on("mousemove", function() {return tooltip.style("top", (d3.event.pageY-10)+"px").style("left", (d3.event.pageX+10)+"px").text(d3.event.currentTarget.__data__.text);})
+    .on("mousemove", function() {return tooltip.style("top", (d3.event.pageY-35)+"px").style("left", (d3.event.pageX+10)+"px").text(d3.event.currentTarget.__data__.text);})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
-
   var tooltip = d3.select("body")
-    .append("div")
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
+                  .append("div")
+                  .style("position", "absolute")
+                  .style("z-index", "10")
+                  .style("visibility", "hidden")
 
 
   var xAxisGroup = svgContainer.append("g")
-    .attr("transform", "translate(0, 100)")
-    .call(xAxis);
+                               .attr("transform", "translate(0, 100)")
+                               .call(xAxis);
+
+  svgContainer.append("text")
+              .attr("x", 75 )
+              .attr("y", 165 )
+              .style("text-anchor", "middle")
+              .text("negative sentiment");
+        
+  svgContainer.append("text")
+              .attr("x", 425 )
+              .attr("y", 165 )
+              .style("text-anchor", "middle")
+              .text("positive sentiment");
 }
 
 function colorFromGender(gender) {
@@ -74,7 +89,7 @@ function colorFromGender(gender) {
     return '#52CFF8'
   } else if (gender == "female") {
     return 'pink'
-  } else {
+  } else if (gender == "neutral") {
     return 'transparent'
   }
 }
