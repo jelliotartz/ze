@@ -1,8 +1,4 @@
-.navbar-left {
-}
-
 .logo {
-	border: 1px solid red;
 	text-align: center;
 }
 
@@ -10,6 +6,11 @@
 .navbar-left-pos {
 	width: 50%;
 	margin: 0;
+}
+
+.create-sample-button-wrapper {
+	width: 100%;
+	margin-left: 46%; // this is problematic for size responsiveness
 }
 
 
@@ -25,7 +26,7 @@
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  padding: 25px 12px;
+  padding: 25px 20px;
   font-size: 16px;
   line-height: 1.42857143;
   border-radius: 4px;
@@ -46,9 +47,9 @@
   outline-offset: -2px;
 }
 
-.create-sample-button:hover,
-.create-sample-button:focus,
-.create-sample-button.focus {
+.create-sample-button:hover a,
+.create-sample-button:focus a,
+.create-sample-button.focus a {
   color: #333333;
   text-decoration: none;
 }
