@@ -17,23 +17,35 @@ $(function() {
                                .range([50,350]);
 
     var xAxis = d3.svg.axis()
-                   .scale(linearScale);
+                   .scale(linearScale)
+                   .ticks(2);
 
     var yAxis = d3.svg.axis()
-                    .scale(linearScale);
+                    .scale(linearScale)
+                    .ticks(2);
 
     var svgContainer = d3.select("#scatter").append("svg")
                                             .attr("width", 400)
                                             .attr("height", 400)
                                             .style("border", "1px solid black")
 
+
     var xAxisGroup = svgContainer.append("g")
                                  .call(xAxis)
                                  .attr("transform","translate(0,200)");
 
+
+
     var yAxisGroup = svgContainer.append("g")
                                 .call(yAxis)
-                                .attr("transform","translate(200,400) rotate(270 0 0)");
+                                .attr("transform","translate(200,400) rotate(270 0 0)")
+                                .selectAll("text")
+                                    .attr("transform", "translate(15, 20) rotate(90)")
+                                    .style("text-anchor","end");
+
+    svgContainer.selectAll(".tick")
+                .filter(function(d) { return d === 0})
+                .remove();
 
     svgContainer.selectAll("circle")
                 .data(averages)
