@@ -11,7 +11,8 @@ $(document).ready(function(){
     // render views
     var view = new SampleView(sample);
     view.displayHighlightedContent();
-    view.showStatistics(data.averages);
+    view.showStatistics();
     view.createNumberLine();
-  })
+    view.bindPopups();
+  });
 })

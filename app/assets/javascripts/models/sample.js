@@ -17,3 +17,24 @@ Sample.prototype.addKeywords = function(keywords) {
     that.keywords.push(keyword);
   });
 }
+
+Sample.prototype.calculateAverages = function() {
+  if (this.keywords.length == 0) {
+    return "No averages";
+  } else {
+    var averages = {};
+    var that = this;
+    var genderCount = function(gender) {
+      return that.keywords.filter(function(keyword){
+        return keyword.gender === gender;
+      }).length
+    }
+    this.keywords.forEach(function(keyword) {
+      averages[keyword.gender] = keyword.sentiment_score + (averages[keyword.gender] || 0);
+    })
+    for (var gender in averages) {
+      averages[gender] /= genderCount(gender);
+    }
+    return averages;
+  }
+}
