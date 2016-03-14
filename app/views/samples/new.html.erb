@@ -1,14 +1,15 @@
-<h2>Enter your text below:</h2>
+<h2 class="new-sample-title">Enter your text</h2>
 
-<%= form_for :sample, {url: analyze_path, remote: true, html: { class: "content-input" } } do |f| %>
+<%= form_for :sample, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
   <%= f.text_area :content %>
-  <%= f.submit "Submit" %>
+  <br>
+  <%= f.submit "Enter your text!" %>
 <% end %>
 
-<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input" } } do |f| %>
-  <%= f.label "Enter a twitter handle"  %>
+<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
   <%= f.text_field :content %>
-  <%= f.submit "Submit" %>
+  <br>
+  <%= f.submit "Enter a twitter handle!", :class => 'twitter-submit-button' %>
 <% end %>
 
 <%= form_for :image, {url: analyze_path, multipart: true, remote: true, authenticity_token: true, html: { class: "content-input", id: "image_submit" } } do |f| %>

@@ -35,6 +35,8 @@ gem 'guess'
 gem 'd3-rails'
 gem 'tesseract-ocr'
 gem 'remotipart'
+gem "d3-rails"
+gem 'ejs'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

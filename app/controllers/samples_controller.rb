@@ -8,11 +8,6 @@ class SamplesController < ApplicationController
   end
 
   def analyze
-    puts params
-    puts "*" * 100
-    puts "*" * 100
-    puts "*" * 100
-    puts "*" * 100
     if params[:image]
       engine = Tesseract::Engine.new do |config|
         config.language  = :eng
@@ -23,13 +18,9 @@ class SamplesController < ApplicationController
       end
       if remotipart_submitted?
         new_image = params[:image][:filename].path
-        p new_image
       else
-        p "NOT XHR!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         new_image =  params[:image][:filename].path
-        p new_image
       end
-      p "AT THE END OF IMAGE SECTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
       text_from_image = clean(engine.text_for(new_image))
       @sample = Sample.new({content: text_from_image})
     elsif params[:tweet]
@@ -53,7 +44,7 @@ class SamplesController < ApplicationController
     @sample.user_id = session[:user_id]
     @sample.save
 
-    render json: { sample: @sample, keywords: @keywords }
+    render json: { sample: @sample, keywords: @keywords, averages: @averages }
 
   end
 
