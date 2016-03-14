@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       end
     end
 
-    @key_matches = key_matches.select {|key| key.text.match(/(#{query})/)}
+    @key_matches = key_matches.select {|key| key.text.downcase.match(/(#{query})/)}
     @key_matches.each {|key| @sample_matches << key.sample}
     @sample_matches.uniq!
     

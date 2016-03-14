@@ -16,7 +16,7 @@ $(function(){
 			view.createNumberLine();
 		},
 		addRemoveLinks: true,
-		maxFiles: 5,
+		maxFiles: 1,
 	};
 
 	twitterForm.hide();

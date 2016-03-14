@@ -15,8 +15,7 @@ class SamplesController < ApplicationController
       string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
       @sample = Sample.new({content: string_of_tweets})
     elsif params[:file]
-      binding.pry
-        parsed_file = Yomu.new params[:file]
+        parsed_file = Yomu.new params[:file].tempfile
         @sample = Sample.new({content: parsed_file.text})
     else
       # just create sample
