@@ -3,7 +3,8 @@ $(function(){
 	var twitterForm = $("#twitter_form");
 	var toggleSwitch = $("#toggle-form");
 	var toggleText = $("#toggle-text");
-	
+	var dropZoneForm = $("#drop-form");
+
 	Dropzone.options.dropForm = {
 		success: function(e, data) {
 			var sample = new Sample(data.sample);
@@ -15,24 +16,26 @@ $(function(){
 			view.showStatistics(data.averages);
 			view.createNumberLine();
 		},
+
+		complete: function(){
+			this.removeAllFiles();
+		},
+
 		addRemoveLinks: true,
 		maxFiles: 1,
 	};
 
+	textForm.addClass("shown");
 	twitterForm.hide();
+	dropZoneForm.parent().hide();
 
-	var toggleCount = 0;
-
-	toggleSwitch.on("click", function(e){
+	toggleSwitch.on("click", "a", function(e){
 		e.preventDefault();
-		textForm.animate({height: "toggle"});
-		twitterForm.animate({height: "toggle"});
-		if(toggleCount%2===1) {
-			toggleText.text("Twitter");
-		}
-		else {
-			toggleText.text("Text");
-		}
-		toggleCount++;
+		var active = $(".shown");
+		var next = $(this).attr('href');
+
+		active.animate({height: "toggle"});
+		active.removeClass("shown");
+		$(next).addClass("shown").animate({height: "toggle"});
 	});
 });
