@@ -1,3 +1,54 @@
 .navbar-left {
-	padding-top: 1.5em;
+}
+
+.logo {
+	border: 1px solid red;
+	text-align: center;
+}
+
+
+.navbar-left-pos {
+	width: 50%;
+	margin: 0;
+}
+
+
+.create-sample-button {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 25px 12px;
+  font-size: 16px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.create-sample-button:focus,
+.create-sample-button:active:focus,
+.create-sample-button.active:focus,
+.create-sample-button.focus,
+.create-sample-button:active.focus,
+.create-sample-button.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.create-sample-button:hover,
+.create-sample-button:focus,
+.create-sample-button.focus {
+  color: #333333;
+  text-decoration: none;
 }
