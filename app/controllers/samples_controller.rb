@@ -8,15 +8,16 @@ class SamplesController < ApplicationController
   end
 
   def analyze
-    if request.xhr?
-      a = params
-      binding.pry
-    end
+
     if params[:tweet]
       tweeter = TwitterScraper.new
       tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
       string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
       @sample = Sample.new({content: string_of_tweets})
+    elsif params[:file]
+      binding.pry
+        parsed_file = Yomu.new params[:file]
+        @sample = Sample.new({content: parsed_file.text})
     else
       # just create sample
       @sample = Sample.new(sample_params)

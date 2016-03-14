@@ -17,11 +17,9 @@
 </div>
 
 
-<div>
-	<hr>
-	<%= form_tag({action: :analyze}, {multipart: true, class: "dropzone", id:"drop-form"}) do %>
+<hr>
+<%= form_tag({action: :analyze}, {multipart: true, class: "dropzone content-input", id:"drop-form"}) do %>
 <% end %>
-</div>
 
 <div id="output">
 </div>
