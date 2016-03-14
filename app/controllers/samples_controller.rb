@@ -29,7 +29,7 @@ class SamplesController < ApplicationController
     @sample.user_id = session[:user_id]
     @sample.save
 
-    render json: { sample: @sample, keywords: @keywords }
+    render json: { sample: @sample, keywords: @keywords, averages: @averages }
 
   end
 
