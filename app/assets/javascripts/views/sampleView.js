@@ -12,21 +12,21 @@ SampleView.prototype.wrapSampleContent = function() {
   var contentHtml = $("<div>" + this.sample.content + "</div>");
 
   keywords.forEach(function(keyword) {
-    contentHtml.highlight(keyword.text, { element: 'span', className: keyword.gender + " keyword " + keyword.sentiment_type, data: { sentiment_score: keyword.sentiment_score } })
+    contentHtml.highlight(keyword.text, { wordsOnly: true, element: 'span', className: keyword.gender + " keyword " + keyword.sentiment_type, data: { sentiment_score: keyword.sentiment_score } })
   })
   return contentHtml;
 };
 
-SampleView.prototype.showStatistics = function(averages) {
-  $("#output").append(this.generateAverageView(averages));
+SampleView.prototype.showStatistics = function() {
+  $("#output").append(this.generateAverageView(this.sample.calculateAverages()));
 }
 
 SampleView.prototype.generateAverageView = function(averages) {
-  var ul = $("<ul>"); // why does this automatically get navbar styling??
-  // debugger;
-  averages.forEach(function(average) {
-    ul.append($("<li>").text(average[0] + ": " + average[1].toFixed(2)))
-  })
+  var ul = $("<ul>");
+  for(var average in averages) {
+    // debugger;
+    ul.append($("<li>").text(average + ": " + averages[average].toFixed(2)))
+  }
   return ul;
 }
 
@@ -77,4 +77,34 @@ function colorFromGender(gender) {
   } else {
     return 'transparent'
   }
+}
+
+SampleView.prototype.bindPopups = function() {
+  var that = this;
+  $("#output").on("click",".keyword",function() {
+    var popup = $(JST["templates/keywordPopup"]());
+    var keyword_text = $(this).text();
+    var x = $(this).offset().left;
+    var y = $(this).offset().top - 50;
+    $("body").append(popup);
+    popup.css({
+                "position":"absolute",
+                "top": y, "left": x,
+                "background-color": "white",
+                "border": "1px solid black"
+                })
+
+      $("body").on("click", ".keyword-popup input", function() {
+        var gender = $(this).val();
+        var keyword = that.sample.keywords.find(function(keyword) {
+          return keyword.text === keyword_text
+        });
+        keyword.gender = gender;
+        that.displayHighlightedContent();
+        that.showStatistics();
+        that.createNumberLine();
+        $(this).closest(".keyword-popup").remove();
+        $("body").off("click", ".keyword-popup input")
+      });
+  });
 }

@@ -1,4 +1,5 @@
 function Keyword(keyword_details) {
+  this.id = keyword_details["id"];
   this.text = keyword_details["text"];
   this.sample_id = keyword_details["sample_id"];
   this.sentiment_type = keyword_details["sentiment_type"];

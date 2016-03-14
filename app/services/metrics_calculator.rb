@@ -18,6 +18,6 @@ class MetricsCalculator
     averages = grouped_keywords.map do |group, keywords|
       [group, keywords_average(keywords)]
     end
-    averages
+    Hash[averages]
   end
 end

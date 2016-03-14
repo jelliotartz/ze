@@ -4,15 +4,15 @@ class UsersController < ApplicationController
     @users = User.all
     redirect_to '/'
   end
-  
+
   def search
     user = User.find(session[:user_id])
     query = params[:query].downcase
-    @sample_matches = []  
+    @sample_matches = []
     key_matches = []
     @frequency = Hash.new(0)
 
-    user.samples.each do |sample| 
+    user.samples.each do |sample|
       if sample.keywords.any?
         sample.keywords.each do |keyword|
           key_matches << keyword
@@ -23,8 +23,8 @@ class UsersController < ApplicationController
     @key_matches = key_matches.select {|key| key.text.match(/(#{query})/)}
     @key_matches.each {|key| @sample_matches << key.sample}
     @sample_matches.uniq!
-    
-    @key_matches.each do |key| 
+
+    @key_matches.each do |key|
       sample_data = key.sample.content.split(" ")
       sample_data.each do |word|
         if word == key.text.split(" ")[0]
@@ -38,6 +38,10 @@ class UsersController < ApplicationController
   def show
     if logged_in?
       @user = User.find(params[:id])
+      respond_to do |format|
+        format.html
+        format.json { render :json => {samples: @user.samples, keywords: @user.keywords}.to_json }
+      end
     else
       redirect_to '/'
     end
