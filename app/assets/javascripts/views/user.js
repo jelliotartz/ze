@@ -7,9 +7,15 @@ $(function() {
       var sample = samples.find(function(sample) { return sample.id === keyword.sample_id });
       sample.addKeyword(keyword);
     })
-    // debugger;
-    // sample.addKeywords(keywords);
+
+
+    var derivers = $.pivotUtilities.derivers;
     var averages = samples.map(function(sample) { return sample.calculateAverages() });
+    samples.forEach(function(sample) { sample.female = sample.calculateAverages().female || 0; sample.male = sample.calculateAverages().male || 0 });
+
+    $("#scatter").pivotUI(samples, { renderers: $.pivotUtilities.c3_renderers });
+    debugger;
+    // sample.addKeywords(keywords);
 
 
     var linearScale = d3.scale.linear()
