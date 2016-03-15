@@ -3,7 +3,8 @@ $(function(){
 	var twitterForm = $("#twitter_form");
 	var toggleSwitch = $("#toggle-form");
 	var toggleText = $("#toggle-text");
-	var dropZoneForm = $("#drop-form");
+	var dropZoneForm = $("#drop_form");
+	var urlForm = $("#url_form");
 
 	Dropzone.options.dropForm = {
 		success: function(e, data) {
@@ -28,8 +29,9 @@ $(function(){
 	};
 
 	textForm.addClass("shown");
+	urlForm.hide();
 	twitterForm.hide();
-	dropZoneForm.parent().hide();
+	dropZoneForm.hide();
 
 	toggleSwitch.on("click", "a", function(e){
 		e.preventDefault();

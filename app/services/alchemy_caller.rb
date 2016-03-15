@@ -16,6 +16,20 @@ class AlchemyCaller
     @response = JSON.parse(response.body)
   end
 
+  def convert_to_keyword_objects_url
+    if @response && @response['entities']
+      keywords = @response['entities']
+      keywords.each do |keyword|
+        @sample.keywords << Keyword.new({
+                                          text: keyword["text"],
+                                          sentiment_type: keyword["sentiment"]["type"],
+                                          sentiment_score: keyword["sentiment"]["score"],
+                                          gender: GenderDetector.detect(keyword["text"]),
+                                        })
+      end
+    end
+  end
+
   def convert_to_keyword_objects
     if @response && @response['keywords']
       keywords = @response['keywords']
