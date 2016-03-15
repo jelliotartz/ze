@@ -31,8 +31,8 @@ class TwitterScraper
 
   def concatenate_tweets(tweet_objects)
     concatenated_tweets = ""
-    tweet_objects.each do |tweet|
-      concatenated_tweets += tweet.text
+    tweet_objects.each_with_index do |tweet, index|
+      concatenated_tweets += "#{index + 1}. " + tweet.text + "\n"
     end
     return concatenated_tweets
   end
