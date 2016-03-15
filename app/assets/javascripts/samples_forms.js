@@ -16,6 +16,7 @@ $(function(){
 			view.displayHighlightedContent();
 			view.showStatistics(data.averages);
 			view.createNumberLine();
+			view.bindPopups();
 		},
 
 		complete: function(){
