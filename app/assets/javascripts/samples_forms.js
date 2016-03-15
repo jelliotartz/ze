@@ -21,6 +21,8 @@ $(function(){
 			this.removeAllFiles();
 		},
 
+		dictDefaultMessage: "-- Drop Files Here To Upload --",
+
 		addRemoveLinks: true,
 		maxFiles: 1,
 	};
