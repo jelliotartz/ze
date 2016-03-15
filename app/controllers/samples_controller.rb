@@ -16,6 +16,9 @@ class SamplesController < ApplicationController
     elsif params[:file]
         parsed_file = Yomu.new params[:file].tempfile
         @sample = Sample.new({content: parsed_file.text})
+    elsif params[:url]
+        res = params[:url]
+        binding.pry
     else
       # just create sample
       @sample = Sample.new(sample_params)

@@ -27,6 +27,14 @@
 		<% end %>
 	</div>
 
+	<div id="url_form">
+		<%= form_for :url_sample, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
+		<%= f.text_area :url %>
+		<br>
+		<%= f.submit "Enter your url!" %>
+		<% end %>
+	</div>
+
 	<div id="drop_form">
 		<%= form_tag({action: :analyze}, {multipart: true, class: "dropzone content-input", id:"drop-form"}) do %>
 		<% end %>
