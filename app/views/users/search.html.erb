@@ -1,4 +1,9 @@
-<h3>Query Results</h3> <%= link_to 'Back', user_path(current_user) %><hr>
+<h3>Query Results</h3> 
+<form action="/users/search">
+	<input name="query" placeholder="search keywords">
+</form>
+<%= link_to 'Back', user_path(current_user) %>
+<hr>
 <h3>Word Frequency</h3>
 <% @frequency.each do |key,val| %>
 <p><strong>Key:</strong> <%= key %> <strong>Frequency:</strong> <%= val %></p>
@@ -6,16 +11,16 @@
 
 <h3>Samples:</h3>
 <ul>
-<% @sample_matches.each do |sample| %>
-<%=  markup_keywords(sample).html_safe %>
-<% @key_matches.each do |s| %>
-<% if s.sample_id == sample.id %>
+	<% @sample_matches.each do |sample| %>
+	<%=  markup_keywords(sample).html_safe %>
+	<% @key_matches.each do |s| %>
+	<% if s.sample_id == sample.id %>
 	<li><p><strong>Text:</strong> <%= s.text %></p>
-	<p><strong>Sentiment score:</strong> <%= s.sentiment_score %></p>
-	<p><strong>Sentiment type:</strong> <span class ="<%= s.sentiment_type %>"><%= s.sentiment_type %></span></p>
-	<p><strong>Gender:</strong> <span class ="<%= s.gender %>"><%= s.gender %></span></p>
-	<p><strong>Sample Id:</strong><%= s.sample_id %></p></li>
-<% end %>
-<% end %>
-<% end %>
-</ul>
+		<p><strong>Sentiment score:</strong> <%= s.sentiment_score %></p>
+		<p><strong>Sentiment type:</strong> <span class ="<%= s.sentiment_type %>"><%= s.sentiment_type %></span></p>
+		<p><strong>Gender:</strong> <span class ="<%= s.gender %>"><%= s.gender %></span></p>
+		<p><strong>Sample Id:</strong><%= s.sample_id %></p></li>
+		<% end %>
+		<% end %>
+		<% end %>
+	</ul>
