@@ -8,7 +8,7 @@ class AlchemyCaller
   end
 
   def call_API
-    max_length = 4000
+    max_length = 3000
     # if @sample.content is small enough
     p @sample.content.length
     p @sample.content
