@@ -8,6 +8,7 @@
 			<li><a href="#text_form">Text</a></li>
 			<li><a href="#twitter_form">Twitter</a></li>
 			<li><a href="#drop_form">Upload</a></li>
+			<li><a href="#url_form">Url</a></li>
 		</ul>
 	</div>
 
@@ -20,10 +21,18 @@
 	</div>
 
 	<div id="twitter_form">
-		<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
+		<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input text-box", autocomplete: "off" } } do |f| %>
 		<%= f.text_field :content %>
 		<br>
 		<%= f.submit "Enter a twitter handle!", :class => 'twitter-submit-button' %>
+		<% end %>
+	</div>
+
+	<div id="url_form">
+		<%= form_for :url, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
+		<%= f.text_field :url %>
+		<br>
+		<%= f.submit "Enter your url!", :class => 'twitter-submit-button' %>
 		<% end %>
 	</div>
 
@@ -40,4 +49,8 @@
 <% end %>
 
 <div id="output">
+
+	<div id="averages"></div>
+	<div id="scatter"></div>
+	<div id="highlighted-text"></div>
 </div>
