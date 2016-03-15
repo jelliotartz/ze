@@ -12,3 +12,26 @@
 .twitter-submit-button {
 	margin-top: 10px;
 }
+
+#drop-form {
+	text-align: center;
+	font-size: 30px;
+	text-color: #333333;
+	padding: 0;
+	height: 165px;
+}
+
+#toggle-form {
+	text-align: center;
+	ul {
+		list-style: none;
+		li {
+			display: inline-block;
+			padding-right: 20px;
+		}
+	}
+}
+
+#sample-form-container {
+	height: 230px;
+}

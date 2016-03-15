@@ -1,4 +1,4 @@
-<h3>Query Results</h3> <hr>
+<h3>Query Results</h3> <%= link_to 'Back', user_path(current_user) %><hr>
 <h3>Word Frequency</h3>
 <% @frequency.each do |key,val| %>
 <p><strong>Key:</strong> <%= key %> <strong>Frequency:</strong> <%= val %></p>
