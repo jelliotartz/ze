@@ -1,5 +1,4 @@
 class SamplesController < ApplicationController
-
   def index
   end
 
@@ -7,7 +6,7 @@ class SamplesController < ApplicationController
   end
 
   def analyze
-
+    # binding.pry
 
     if params[:url]
 
@@ -43,11 +42,9 @@ class SamplesController < ApplicationController
       def clean(text)
         text.split(/\n/).compact.select { |v| v.size > 0 }
       end
-      if remotipart_submitted?
-        new_image = params[:image][:filename].path
-      else
-        new_image =  params[:image][:filename].path
-      end
+      p params
+      # binding.pry
+      new_image =  params["image"].tempfile.path
       text_from_image = clean(engine.text_for(new_image))
       @sample = Sample.new({content: text_from_image})
     elsif params[:tweet]

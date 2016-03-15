@@ -1,5 +1,5 @@
-function appendText(event, data) {
-  this.reset(); // reset form
+function appendText(data) {
+  $(".content-input")[0].reset(); // reset form
   $("#output").off("click",".keyword")
   $("body").off("click", ".keyword-popup input")
   // create sample and keywords
@@ -19,6 +19,22 @@ $(document).ready(function(){
 
 
   $(".content-input").on("ajax:success", appendText);
+
+  $('form#image_submit').on("submit", function(e){
+      e.preventDefault();
+      var thing = new FormData();
+      thing.append("image", $("#image_filename")[0].files[0])
+      // console.log(thing)
+      $.ajax({
+              url: "/analyze",
+              type: "post",
+              processData: false,
+              contentType: false,
+              data: thing
+      }).done(function(responseData) {
+        appendText(responseData)
+      })
+    })
 
 });
 
