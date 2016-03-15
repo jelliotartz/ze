@@ -1,16 +1,37 @@
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+
 <h2 class="new-sample-title">Enter your text</h2>
 
-<%= form_for :sample, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
-  <%= f.text_area :content %>
-  <br>
-  <%= f.submit "Enter your text!" %>
-<% end %>
+<div id="sample-form-container">
+	<div id="toggle-form">
+		<ul>
+			<li><a href="#text_form">Text</a></li>
+			<li><a href="#twitter_form">Twitter</a></li>
+			<li><a href="#drop_form">Upload</a></li>
+		</ul>
+	</div>
 
-<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
-  <%= f.text_field :content %>
-  <br>
-  <%= f.submit "Enter a twitter handle!", :class => 'twitter-submit-button' %>
-<% end %>
+	<div id="text_form">
+		<%= form_for :sample, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
+		<%= f.text_area :content %>
+		<br>
+		<%= f.submit "Enter your text!" %>
+		<% end %>
+	</div>
+
+	<div id="twitter_form">
+		<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
+		<%= f.text_field :content %>
+		<br>
+		<%= f.submit "Enter a twitter handle!", :class => 'twitter-submit-button' %>
+		<% end %>
+	</div>
+
+	<div id="drop_form">
+		<%= form_tag({action: :analyze}, {multipart: true, class: "dropzone content-input", id:"drop-form"}) do %>
+		<% end %>
+	</div>
+</div>
 
 <%= form_for :image, {url: analyze_path, multipart: true, remote: true, authenticity_token: true, html: { class: "content-input", id: "image_submit" } } do |f| %>
   <%= f.label "Upload an image"  %>

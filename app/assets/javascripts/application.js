@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require d3
+//= require dropzone
 //= require jquery.highlight.js
 //= require_tree .

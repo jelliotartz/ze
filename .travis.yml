@@ -15,5 +15,6 @@ deploy:
   app: projectze
   api_key: "ac2f23ae-49dc-46e5-bb29-8bd65ce12cc6"
   run:
-  - "rake db:migrate"
+    - "bundle"
+    - "rake db:migrate"
   strategy: git
