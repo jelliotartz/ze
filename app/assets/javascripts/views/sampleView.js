@@ -3,7 +3,8 @@ function SampleView(sample) {
 };
 
 SampleView.prototype.displayHighlightedContent = function() {
-  $("#output").html(this.wrapSampleContent());
+  $("#highlighted-text").html("<h3>Highlighted Text</h3><p>See below for a deeper analysis of your text: <span class='negative'>Red</span> means negative. <span class='positive'>Green</span> means positive. <span class='female'>Pink</span> means it's a feminine-coded word. <span class='male'>Blue</span> means it's a masculine-coded word.</p>")
+  $("#highlighted-text").append(this.wrapSampleContent());
 };
 
 SampleView.prototype.wrapSampleContent = function() {
@@ -18,24 +19,38 @@ SampleView.prototype.wrapSampleContent = function() {
 };
 
 SampleView.prototype.showStatistics = function() {
-  $("#output").append(this.generateAverageView(this.sample.calculateAverages()));
+  $("#averages").html(
+
+    "<h3>Average sentiment by gender</h3><p>Using sentiment analysis, these averages reflect, on a scale from -1 to 1, how negatively or positively the passage feels about men and women.</p>"
+
+    );
+  $("#averages").append(this.generateAverageView(this.sample.calculateAverages()));
 }
 
 SampleView.prototype.generateAverageView = function(averages) {
   var ul = $("<ul>");
-  for(var average in averages) {
-    // debugger;
-    ul.append($("<li>").text(average + ": " + averages[average].toFixed(2)))
+  var setOrder = ["male", "female", "neutral"]
+  for(var index in setOrder) {
+    var gender = setOrder[index]
+    if (averages[gender]) {
+      ul.append($("<li>").text(gender + ": " + averages[gender].toFixed(2)))
+    }
   }
   return ul;
 }
 
 SampleView.prototype.createNumberLine = function(sample) {
 
-  var svgContainer = d3.select("#output")
+  $("#scatter").html(
+
+  "<h3>Keywords</h3><p>These are the gender-coded keywords in your passage and how our algorithm rated their sentiment.</p>"
+
+  )
+
+  var svgContainer = d3.select("#scatter")
                        .append("svg")
                        .attr("width", 500)
-                       .attr("height", 500);
+                       .attr("height", 200);
 
   var linearScale = d3.scale.linear()
                       .domain([-1,1])
@@ -46,7 +61,7 @@ SampleView.prototype.createNumberLine = function(sample) {
 
   var genderedKeywords = this.sample.keywords.filter(function(keyword) {
     return keyword.gender !== "neutral";
-  })         
+  })
 
   var circles = svgContainer.selectAll("circle")
     .data(genderedKeywords)
@@ -76,7 +91,7 @@ SampleView.prototype.createNumberLine = function(sample) {
               .attr("y", 165 )
               .style("text-anchor", "middle")
               .text("negative sentiment");
-        
+
   svgContainer.append("text")
               .attr("x", 425 )
               .attr("y", 165 )
@@ -96,7 +111,7 @@ function colorFromGender(gender) {
 
 SampleView.prototype.bindPopups = function() {
   var that = this;
-  $("#output").on("click",".keyword",function() {
+  $("#highlighted-text").on("click",".keyword",function() {
     var popup = $(JST["templates/keywordPopup"]());
     var keyword_text = $(this).text();
     var x = $(this).offset().left;
