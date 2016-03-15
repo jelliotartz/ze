@@ -1,5 +1,4 @@
 class SamplesController < ApplicationController
-  require 'pry'
 
   def index
   end
