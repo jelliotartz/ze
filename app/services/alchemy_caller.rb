@@ -16,16 +16,18 @@ class AlchemyCaller
     @response = JSON.parse(response.body)
   end
 
-  def call_API_url(url)
-    response = HTTParty.post("http://access.alchemyapi.com/calls/text/TextGetRankedKeywords",
-    :query => { :apikey => ENV["URL_SECRET_ALCHEMY"],
-               :url => url,
-               :sourceText => "cleaned",
-               :outputMode => 'json',
-               :sentiment => 1
-             },
-    :headers => { 'Content-Type' => 'application/x-www-form-urlencoded' } )
-    @response = JSON.parse(response.body)
+  def convert_to_keyword_objects_url
+    if @response && @response['entities']
+      keywords = @response['entities']
+      keywords.each do |keyword|
+        @sample.keywords << Keyword.new({
+                                          text: keyword["text"],
+                                          sentiment_type: keyword["sentiment"]["type"],
+                                          sentiment_score: keyword["sentiment"]["score"],
+                                          gender: GenderDetector.detect(keyword["text"]),
+                                        })
+      end
+    end
   end
 
   def convert_to_keyword_objects
