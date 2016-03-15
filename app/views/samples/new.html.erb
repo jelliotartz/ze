@@ -33,10 +33,10 @@
 	</div>
 </div>
 
-<%= form_for :image, {url: analyze_path, multipart: true, remote: true, authenticity_token: true, html: { class: "content-input", id: "image_submit" } } do |f| %>
+<%= form_for :image, {url: analyze_path, multipart: true, authenticity_token: true, html: { class: "content-input", id: "image_submit" } } do |f| %>
   <%= f.label "Upload an image"  %>
   <%= f.file_field :filename %>
-  <%= f.submit "Submit" %>
+  <%= f.submit "Submit", id: "submit_image" %>
 <% end %>
 
 <div id="output">

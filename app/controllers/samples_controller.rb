@@ -15,13 +15,10 @@ class SamplesController < ApplicationController
       def clean(text)
         text.split(/\n/).compact.select { |v| v.size > 0 }
       end
-      if remotipart_submitted?
-        new_image = params[:image][:filename].path
-      else
-        new_image =  params[:image][:filename].path
-      end
+      new_image = params[:image][:filename].path
       text_from_image = clean(engine.text_for(new_image))
       @sample = Sample.new({content: text_from_image})
+
     elsif params[:tweet]
       tweeter = TwitterScraper.new
       tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
@@ -46,6 +43,10 @@ class SamplesController < ApplicationController
     @sample.user_id = session[:user_id]
     @sample.save
 
+
+    if params[:image]
+
+    end
     render json: { sample: @sample, keywords: @keywords, averages: @averages }
 
   end
