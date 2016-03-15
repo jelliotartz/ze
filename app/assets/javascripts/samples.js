@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   $(".content-input").on("ajax:success",function(event, data) {
     this.reset(); // reset form
-    $("#output").off("click",".keyword")
+    $("#highlighted-text").off("click",".keyword")
     $("body").off("click", ".keyword-popup input")
     // create sample and keywords
     var sample = new Sample(data.sample);
