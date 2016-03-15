@@ -7,6 +7,7 @@ class SamplesController < ApplicationController
   end
 
   def analyze
+<<<<<<< HEAD
     if params[:image]
       # Pull sample from image through Tesseract
       engine = Tesseract::Engine.new do |config|
@@ -37,20 +38,62 @@ class SamplesController < ApplicationController
       # just create sample
       @sample = Sample.new(sample_params)
     end
+=======
 
-    caller = AlchemyCaller.new(@sample)
-    caller.call_API
-    caller.convert_to_keyword_objects
+    if params[:url]
 
-    @keywords = @sample.keywords
-    calculator = MetricsCalculator.new(@sample.keywords)
-    @averages = calculator.return_averages_by_gender
+      res = HTTParty.post("http://gateway-a.watsonplatform.net/calls/url/URLGetRankedNamedEntities",
+      :query => { :apikey => ENV["URL_SECRET_ALCHEMY"],
+                 :url => params[:url][:url],
+                 :sourceText => "cleaned",
+                 :showSourceText => 1,
+                 :outputMode => 'json',
+                 :sentiment => 1
+               },
+      :headers => { 'Content-Type' => 'application/x-www-form-urlencoded' } )
+      @sample = Sample.new({content: res["text"]})
 
-    @sample.user_id = session[:user_id]
-    @sample.save
+      caller = AlchemyCaller.new(@sample)
+      caller.response = res
+      caller.convert_to_keyword_objects_url
 
-    render json: { sample: @sample, keywords: @keywords, averages: @averages }
+      @keywords = @sample.keywords
+      calculator = MetricsCalculator.new(@sample.keywords)
+      @averages = calculator.return_averages_by_gender
 
+      @sample.user_id = session[:user_id]
+      @sample.save
+
+      render json: { sample: @sample, keywords: @keywords, averages: @averages }
+    else
+      if params[:tweet]
+        tweeter = TwitterScraper.new
+        tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
+        string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
+        @sample = Sample.new({content: string_of_tweets})
+      elsif params[:file]
+        parsed_file = Yomu.new params[:file].tempfile
+        @sample = Sample.new({content: parsed_file.text})
+      else
+        # just create sample
+        @sample = Sample.new(sample_params)
+      end
+>>>>>>> master
+
+      caller = AlchemyCaller.new(@sample)
+      caller.call_API
+      caller.convert_to_keyword_objects
+
+      @keywords = @sample.keywords
+      calculator = MetricsCalculator.new(@sample.keywords)
+      @averages = calculator.return_averages_by_gender
+
+      @sample.user_id = session[:user_id]
+      @sample.save
+
+      render json: { sample: @sample, keywords: @keywords, averages: @averages }
+
+    end
   end
 
   def create
