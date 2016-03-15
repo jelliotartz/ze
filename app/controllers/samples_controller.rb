@@ -7,15 +7,32 @@ class SamplesController < ApplicationController
   end
 
   def analyze
-
-    if params[:tweet]
+    if params[:image]
+      # Pull sample from image through Tesseract
+      engine = Tesseract::Engine.new do |config|
+        config.language  = :eng
+        config.blacklist = '|'
+      end
+      def clean(text)
+        text.split(/\n/).compact.select { |v| v.size > 0 }
+      end
+      if remotipart_submitted?
+        new_image = params[:image][:filename].path
+      else
+        new_image =  params[:image][:filename].path
+      end
+      text_from_image = clean(engine.text_for(new_image))
+      @sample = Sample.new({content: text_from_image})
+    elsif params[:tweet]
+      # Pull sample from twitter through scraper
       tweeter = TwitterScraper.new
       tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
       string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
       @sample = Sample.new({content: string_of_tweets})
     elsif params[:file]
-        parsed_file = Yomu.new params[:file].tempfile
-        @sample = Sample.new({content: parsed_file.text})
+      # pull sample from dropped file through Yomu
+      parsed_file = Yomu.new params[:file].tempfile
+      @sample = Sample.new({content: parsed_file.text})
     else
       # just create sample
       @sample = Sample.new(sample_params)
