@@ -1,0 +1,22 @@
+.tool-popup {
+	position: absolute;
+    z-index: 999;
+    background-color: #dedede;
+    padding: 5px;
+    border: 1px solid #fff;
+    width: 250px;
+    p {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    background-color: #222;
+    padding: 2px 7px;
+	}
+}
+
+.tool-popup-icon {
+	font-family: Glyphicons Halflings;
+	font-size: 15px;
+    color: red;
+    font-weight: bold;
+}
