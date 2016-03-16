@@ -39,3 +39,9 @@ Sample.prototype.calculateAverages = function() {
     return averages;
   }
 }
+
+Sample.prototype.genderedKeywords = function() {
+  return this.keywords.filter(function(keyword) {
+    return keyword.gender !== "neutral";
+  });
+}

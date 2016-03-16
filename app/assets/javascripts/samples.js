@@ -17,14 +17,14 @@ function appendText(data) {
 
 $(document).ready(function(){
 
-
   $(".content-input").on("ajax:success", appendText);
 
   $('form#image_submit').on("submit", function(e){
+      console.log("hit the image submit")
       e.preventDefault();
       var thing = new FormData();
       thing.append("image", $("#image_filename")[0].files[0])
-      // console.log(thing)
+      console.log(thing)
       $.ajax({
               url: "/analyze",
               type: "post",
@@ -37,19 +37,3 @@ $(document).ready(function(){
     })
 
 });
-
-
-
-//     function getBase64Image(img) {
-
-//     var canvas = document.createElement("canvas");
-//     canvas.width = img.width;
-//     canvas.height = img.height;
-
-//     var ctx = canvas.getContext("2d");
-//     ctx.drawImage(img, 0, 0);
-
-//     var dataURL = canvas.toDataURL("image/png");
-
-//     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-// }

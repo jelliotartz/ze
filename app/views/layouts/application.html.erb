@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ze</title>
+  <title>ProjectZe</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
   </script>
@@ -19,7 +19,7 @@
       <div class="navbar-left-pos" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
           <li>
-            <%= link_to 'WeAreZe', '/' %>
+            <%= link_to 'ProjectZe', '/' %>
           </li>
         </ul>
       </div>
@@ -27,7 +27,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
-            <li><%= link_to current_user.email, user_path(current_user) %></li>
+            <li><%= link_to current_user.email, user_path(current_user), remote: true, "data-type" => "json", id: "profile" %></li>
             <li><%= link_to 'Logout', logout_path, method: :delete %></li>
           <% else %>
             <li><%= link_to 'Register', new_user_path %></li>
@@ -40,7 +40,7 @@
   </nav>
 
 
-  <div class="container">
+  <div id="content" class="container">
     <%= yield %>
   </div>
 
