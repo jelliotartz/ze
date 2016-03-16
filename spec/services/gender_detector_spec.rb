@@ -18,7 +18,7 @@ describe GenderDetector do
     } }
 
   let(:transformed_object2) { { "text" => "actor", "type" => "Entity",
-      "sentiment" => { "type" => "negative", "score" => "-0.38312" }, "gender" => "unisex"
+      "sentiment" => { "type" => "negative", "score" => "-0.38312" }, "gender" => "neutral"
     } }
 
   describe "#detect_word" do
@@ -36,7 +36,7 @@ describe GenderDetector do
     end
 
     it "returns 'unisex' when text is found in both arrays" do
-      expect(GenderDetector.detect_word(unisex_text)).to eq ("unisex")
+      expect(GenderDetector.detect_word(unisex_text)).to eq ("neutral")
     end
 
     it "detects basic pluralization" do
@@ -55,7 +55,7 @@ describe GenderDetector do
     end
 
     it "returns 'unisex' for split name" do
-      expect(GenderDetector.detect_name("morgan")).to eq ("unisex")
+      expect(GenderDetector.detect_name("morgan")).to eq ("neutral")
     end
 
     it "returns 'neutral' for name not in database" do
@@ -73,7 +73,7 @@ describe GenderDetector do
     end
 
     it "returns 'unisex' for split name" do
-      expect(GenderDetector.detect("morgan")).to eq ("unisex")
+      expect(GenderDetector.detect("morgan")).to eq ("neutral")
     end
 
     it "returns 'neutral' for name not in database" do
@@ -93,7 +93,7 @@ describe GenderDetector do
     end
 
     it "returns 'unisex' when text is found in both arrays" do
-      expect(GenderDetector.detect(unisex_text)).to eq ("unisex")
+      expect(GenderDetector.detect(unisex_text)).to eq ("neutral")
     end
   end
 

@@ -38,9 +38,7 @@
 	}
 }
 
-#sample-form-container {
-	height: 230px;
-}
+
 
 //adjust the size of name field for forms
 
@@ -57,3 +55,13 @@
 
 
 
+#image_submit * {
+	display: block;
+	max-width: 300px;
+	margin: 10px auto;
+	text-align: center;
+}
+
+#sample-form-container {
+	height: 230px;
+}

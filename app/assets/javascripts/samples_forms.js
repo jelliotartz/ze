@@ -5,6 +5,7 @@ $(function(){
 	var toggleText = $("#toggle-text");
 	var dropZoneForm = $("#drop_form");
 	var urlForm = $("#url_form");
+	var imageForm = $("#image_form");
 
 	Dropzone.options.dropForm = {
 		success: function(e, data) {
@@ -13,8 +14,8 @@ $(function(){
 			sample.addKeywords(keywords);
 			// make views
 			var view = new SampleView(sample);
-			view.displayHighlightedContent();
 			view.showStatistics(data.averages);
+			view.displayHighlightedContent();
 			view.createNumberLine();
 			view.bindPopups();
 		},
@@ -33,6 +34,7 @@ $(function(){
 	urlForm.hide();
 	twitterForm.hide();
 	dropZoneForm.hide();
+	imageForm.hide();
 
 	toggleSwitch.on("click", "a", function(e){
 		e.preventDefault();

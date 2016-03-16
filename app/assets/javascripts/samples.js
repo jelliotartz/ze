@@ -1,19 +1,38 @@
 $(document).ready(function(){
 
-  $(".content-input").on("ajax:success",function(event, data) {
-    this.reset(); // reset form
-    $("#highlighted-text").off("click",".keyword")
-    $("body").off("click", ".keyword-popup input")
-    // create sample and keywords
-    var sample = new Sample(data.sample);
-    var keywords = data.keywords.map(function(keyword) { return new Keyword(keyword) })
-    sample.addKeywords(keywords);
+  $(".content-input").on("ajax:success", appendText);
 
-    // render views
-    var view = new SampleView(sample);
-    view.displayHighlightedContent();
-    view.showStatistics();
-    view.createNumberLine();
-    view.bindPopups();
-  });
-})
+  $('form#image_submit').on("submit", function(e){
+      e.preventDefault();
+      var imageForm = new FormData();
+      imageForm.append("image", $("#image_filename")[0].files[0])
+      $.ajax({
+              url: "/analyze",
+              type: "post",
+              processData: false,
+              contentType: false,
+              data: imageForm
+      }).done(function(responseData) {
+        $('form#image_submit')[0].reset();
+        appendText(event, responseData)
+      })
+    })
+
+});
+
+function appendText(event, data) {
+  $(".content-input")[0].reset(); // reset form
+  $("#output").off("click",".keyword")
+  $("body").off("click", ".keyword-popup input")
+  // create sample and keywords
+  var sample = new Sample(data.sample);
+  var keywords = data.keywords.map(function(keyword) { return new Keyword(keyword) })
+  sample.addKeywords(keywords);
+
+  // render views
+  var view = new SampleView(sample);
+  view.showStatistics();
+  view.createNumberLine();
+  view.displayHighlightedContent();
+  view.bindPopups();
+}

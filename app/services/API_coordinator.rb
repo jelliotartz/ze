@@ -35,7 +35,7 @@ class APICoordinator
     end
 
     new_image =  image.tempfile.path
-    clean(engine.text_for(new_image))
+    clean(engine.text_for(new_image)).join(" ");
   end
 
   # tweet fetching
