@@ -9,6 +9,7 @@
 			<li><a href="#twitter_form">Scrape Twitter</a></li>
 			<li><a href="#drop_form">Upload a File</a></li>
 			<li><a href="#url_form">Provide Url</a></li>
+			<li><a href="#image_form">Image OCR</a></li>
 			<span title="This lets you choose what format of text you would like to analyze." class="tool-popup-icon">?</span>
 		</ul>
 	</div>
@@ -41,7 +42,17 @@
 		<%= form_tag({action: :analyze}, {multipart: true, class: "dropzone content-input", id:"drop-form"}) do %>
 		<% end %>
 	</div>
+
+	<div id="image_form">
+		<%= form_for :image, {url: analyze_path, multipart: true, authenticity_token: true, html: { id: "image_submit" } } do |f| %>
+		  <%= f.label "Upload an image"  %>
+		  <%= f.file_field :filename %>
+		  <%= f.submit "Submit", id: "submit_image" %>
+		<% end %>
+	</div>
 </div>
+
+
 
 <div id="output">
 	<div id="averages"></div>
