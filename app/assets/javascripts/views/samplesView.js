@@ -84,13 +84,13 @@ SamplesView.prototype.drawScatter = function() {
                 .attr("x", (1 - margins) * width )
                 .attr("y", (1 - margins) * height )
                 .style("text-anchor", "middle")
-                .text("man-hater");
+                .text("biased against men");
 
     svgContainer.append("text")
-                .attr("x", margins * width )
+                .attr("x", (margins + 0.02) * width )
                 .attr("y", margins * height )
                 .style("text-anchor", "middle")
-                .text("woman-hater");
+                .text("biased against women");
 
     return div;
 }
