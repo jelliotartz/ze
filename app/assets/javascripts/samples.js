@@ -32,6 +32,7 @@ $(document).ready(function(){
               contentType: false,
               data: thing
       }).done(function(responseData) {
+        console.log(responseData)
         appendText(responseData)
       })
     })
