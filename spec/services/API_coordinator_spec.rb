@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-describe AlchemyCaller do
+describe APICoordinator do
 
   #not testing the API call so we don't waste any credits
-  let(:sample) { Sample.new(content: "Susan likes bikes", name: "my sample")}
-  let(:caller) { AlchemyCaller.new(sample)}
+  let(:params) { params[:sample][:content] = "Susan likes bikes" }
+  let(:caller) { APICoordinator.new(params)}
 
-  describe "#convert_to_keyword_objects" do
+  describe "#create_sample" do
 
     it "adds nothing when given empty response array" do
-      caller.convert_to_keyword_objects
+      caller.create_sample
       expect(sample.keywords.empty?).to be(true)
     end
 
