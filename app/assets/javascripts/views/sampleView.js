@@ -125,6 +125,8 @@ function colorFromGender(gender) {
 SampleView.prototype.bindPopups = function() {
   var that = this;
   $("#highlighted-text").on("click",".keyword",function() {
+    $("body").off("click", ".keyword-popup input");
+    $("body").find($(".keyword-popup")).remove();
     var popup = $(JST["templates/keywordPopup"]());
     var keyword_text = $(this).text();
     var x = $(this).offset().left;
@@ -147,7 +149,7 @@ SampleView.prototype.bindPopups = function() {
         that.showStatistics();
         that.createNumberLine();
         popup.remove();
-        $("body").off("click", ".keyword-popup input")
+        $("body").off("click", ".keyword-popup input");
       });
   });
 }
