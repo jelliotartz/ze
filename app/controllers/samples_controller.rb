@@ -6,7 +6,6 @@ class SamplesController < ApplicationController
   end
 
   def analyze
-
     caller = APICoordinator.new(params)
     caller.call_API
     sample = caller.create_sample
