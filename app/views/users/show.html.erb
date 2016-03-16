@@ -20,7 +20,7 @@
 <ul>
 	<% @user.samples.each do |sample| %>
 
-	<li><%= markup_keywords(sample).html_safe %></li>
+	<li><%= sample.content %></li>
 
 	<% end %>
 </ul>
