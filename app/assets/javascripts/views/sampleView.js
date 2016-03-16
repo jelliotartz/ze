@@ -146,7 +146,7 @@ SampleView.prototype.bindPopups = function() {
         that.displayHighlightedContent();
         that.showStatistics();
         that.createNumberLine();
-        $(this).closest(".keyword-popup").remove();
+        popup.remove();
         $("body").off("click", ".keyword-popup input")
       });
   });
