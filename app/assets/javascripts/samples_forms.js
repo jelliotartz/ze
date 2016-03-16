@@ -14,8 +14,8 @@ $(function(){
 			sample.addKeywords(keywords);
 			// make views
 			var view = new SampleView(sample);
-			view.displayHighlightedContent();
 			view.showStatistics(data.averages);
+			view.displayHighlightedContent();
 			view.createNumberLine();
 			view.bindPopups();
 		},

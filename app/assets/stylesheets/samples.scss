@@ -22,3 +22,31 @@ textarea {
 #highlighted-text {
   margin-bottom: 50px;
 }
+
+// split layout into side-by-side
+#averages {
+	width: 50%;
+	float: left;
+}
+
+#number-line {
+	width: 50%;
+	display: inline-block;
+	float: left;
+	clear: left;
+}
+
+#scatter {
+	position: fixed;
+	width: 50%;
+	display: inline-block;
+	float: left;
+	clear: left;
+}
+
+#highlighted-text {
+	width: 50%;
+	clear: right;
+	float: right;
+	text-align: justify;
+}

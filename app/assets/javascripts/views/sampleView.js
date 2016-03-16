@@ -54,13 +54,13 @@ SampleView.prototype.generateAverageView = function(averages) {
 
 SampleView.prototype.createNumberLine = function(sample) {
 
-  $("#scatter").html(
+  $("#number-line").html(
 
   "<h3>Keywords</h3><p>These are the gender-coded keywords in your passage and how our algorithm rated their sentiment. Hover over a circle to see what keyword it represents.</p>"
 
   )
 
-  var svgContainer = d3.select("#scatter")
+  var svgContainer = d3.select("#number-line")
                        .append("svg")
                        .attr("width", 500)
                        .attr("height", 200);
@@ -84,6 +84,7 @@ SampleView.prototype.createNumberLine = function(sample) {
     .attr("cy", 70)
     .attr("r", 15)
     .style("fill", function(d) { return colorFromGender(d.gender) })
+
     .on("mouseover", function() {return tooltip.style("visibility", "visible");})
     .on("mousemove", function() {return tooltip.style("top", (d3.event.pageY-35)+"px").style("left", (d3.event.pageX+10)+"px").text(d3.event.currentTarget.__data__.text);})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
@@ -136,7 +137,8 @@ SampleView.prototype.bindPopups = function() {
                 "position":"absolute",
                 "top": y, "left": x,
                 "background-color": "white",
-                "border": "1px solid black"
+                "border": "1px solid black",
+                "padding": "10px"
                 })
 
       $("body").on("click", ".keyword-popup input", function() {
