@@ -1,20 +1,3 @@
-function appendText(data) {
-  $(".content-input")[0].reset(); // reset form
-  $("#output").off("click",".keyword")
-  $("body").off("click", ".keyword-popup input")
-  // create sample and keywords
-  var sample = new Sample(data.sample);
-  var keywords = data.keywords.map(function(keyword) { return new Keyword(keyword) })
-  sample.addKeywords(keywords);
-
-  // render views
-  var view = new SampleView(sample);
-  view.displayHighlightedContent();
-  view.showStatistics();
-  view.createNumberLine();
-  view.bindPopups();
-}
-
 $(document).ready(function(){
 
   $(".content-input").on("ajax:success", appendText);
@@ -32,9 +15,25 @@ $(document).ready(function(){
               contentType: false,
               data: thing
       }).done(function(responseData) {
-        console.log(responseData)
-        appendText(responseData)
+        appendText(event, responseData)
       })
     })
 
 });
+
+function appendText(event, data) {
+  $(".content-input")[0].reset(); // reset form
+  $("#output").off("click",".keyword")
+  $("body").off("click", ".keyword-popup input")
+  // create sample and keywords
+  var sample = new Sample(data.sample);
+  var keywords = data.keywords.map(function(keyword) { return new Keyword(keyword) })
+  sample.addKeywords(keywords);
+
+  // render views
+  var view = new SampleView(sample);
+  view.displayHighlightedContent();
+  view.showStatistics();
+  view.createNumberLine();
+  view.bindPopups();
+}
