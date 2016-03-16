@@ -9,7 +9,6 @@ class SamplesController < ApplicationController
   def analyze
 
     if params[:url]
-      
       res = HTTParty.post("http://gateway-a.watsonplatform.net/calls/url/URLGetRankedNamedEntities",
       :query => { :apikey => ENV["URL_SECRET_ALCHEMY"],
                  :url => params[:url][:url],

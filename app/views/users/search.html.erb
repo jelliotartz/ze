@@ -4,12 +4,12 @@
 </form>
 <%= link_to 'Back', user_path(current_user) %>
 <hr>
-<h3>Word Frequency</h3>
+<h3>Word Frequency <span class="tool-popup-icon" title="This shows the frequency of the key in all of your samples">?</span></h3>
 <% @frequency.each do |key,val| %>
 <p><strong>Key:</strong> <%= key %> <strong>Frequency:</strong> <%= val %></p>
 <% end %>
 
-<h3>Samples:</h3>
+<h3>Samples: <span class="tool-popup-icon" title="Samples display their marked-up content along with their sentiment keys, values, and corresponding sample content">?</span></h3>
 <ul>
 	<% @sample_matches.each do |sample| %>
 	<%=  markup_keywords(sample).html_safe %>
