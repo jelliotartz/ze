@@ -1,17 +1,18 @@
-.tool-popup {
+.tool-popup-modal {
 	position: absolute;
     z-index: 99999;
     background-color: #dedede;
     left: -9999px;
-    padding: 5px;
+    padding: 2px;
     border: 1px solid #fff;
     border-radius: 5px;
     width: 250px;
+    box-shadow: 3px 3px 6px grey;
     p {
     margin: 0;
     padding: 0;
-    color: #fff;
-    background-color: #222;
+    color: #4582ec;
+    background-color: #ffffff;
     padding: 2px 7px;
 	}
 }
