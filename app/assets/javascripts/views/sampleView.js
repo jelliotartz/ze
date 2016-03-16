@@ -54,13 +54,13 @@ SampleView.prototype.generateAverageView = function(averages) {
 
 SampleView.prototype.createNumberLine = function(sample) {
 
-  $("#scatter").html(
+  $("#number-line").html(
 
   "<h3>Keywords</h3><p>These are the gender-coded keywords in your passage and how our algorithm rated their sentiment. Hover over a circle to see what keyword it represents.</p>"
 
   )
 
-  var svgContainer = d3.select("#scatter")
+  var svgContainer = d3.select("#number-line")
                        .append("svg")
                        .attr("width", 500)
                        .attr("height", 200);

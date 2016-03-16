@@ -31,8 +31,8 @@ function appendText(event, data) {
 
   // render views
   var view = new SampleView(sample);
-  view.displayHighlightedContent();
   view.showStatistics();
   view.createNumberLine();
+  view.displayHighlightedContent();
   view.bindPopups();
 }
