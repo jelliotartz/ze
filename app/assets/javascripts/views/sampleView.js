@@ -2,10 +2,23 @@ function SampleView(sample) {
   this.sample = sample;
 };
 
+SampleView.prototype.render = function() {
+  // call methods to generate text
+  return JST["templates/sample"]({view: this});
+}
+
 SampleView.prototype.displayHighlightedContent = function() {
-  $("#highlighted-text").html("<h3>Highlighted Text</h3><p>See below for a deeper analysis of your text: <span class='negative'>Red</span> means negative. <span class='positive'>Green</span> means positive. <span class='female'>Pink</span> means it's a feminine-coded word. <span class='male'>Blue</span> means it's a masculine-coded word.</p>")
+  this.displayHighlightCaption();
+  this.displayHighlightedSample();
+};
+
+SampleView.prototype.displayHighlightedSample = function() {
   $("#highlighted-text").append(this.wrapSampleContent());
 };
+
+SampleView.prototype.displayHighlightCaption = function() {
+  $("#highlighted-text").html("<h3>Highlighted Text</h3><p>See below for a deeper analysis of your text: <span class='negative'>Red</span> means negative. <span class='positive'>Green</span> means positive. <span class='female'>Pink</span> means it's a feminine-coded word. <span class='male'>Blue</span> means it's a masculine-coded word.</p>")
+}
 
 SampleView.prototype.wrapSampleContent = function() {
 
@@ -137,4 +150,60 @@ SampleView.prototype.bindPopups = function() {
         $("body").off("click", ".keyword-popup input")
       });
   });
+}
+
+
+SampleView.prototype.createNumberLine2 = function() {
+
+  var div = $("<div>");
+
+
+  var svgContainer = d3.select(div[0])
+                       .append("svg")
+                       .attr("width", 500)
+                       .attr("height", 200);
+
+  var linearScale = d3.scale.linear()
+                      .domain([-1,1])
+                      .range([50,450]);
+
+  var xAxis = d3.svg.axis()
+                    .scale(linearScale);
+
+  var circles = svgContainer.selectAll("circle")
+    .data(this.sample.genderedKeywords())
+    .enter()
+    .append("circle")
+    .attr("cx", function(d) { return linearScale(d.sentiment_score) })
+    .attr("cy", 70)
+    .attr("r", 15)
+    .style("fill", function(d) { return colorFromGender(d.gender) })
+    .on("mouseover", function() {return tooltip.style("visibility", "visible");})
+    .on("mousemove", function() { return tooltip.style("top", (d3.event.pageY-35)+"px").style("left", (d3.event.pageX+10)+"px").text(d3.event.currentTarget.__data__.text);})
+    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+  var tooltip = d3.select(div[0])
+                  .append("div")
+                  .style("position", "absolute")
+                  .style("z-index", "10")
+                  .style("visibility", "hidden")
+
+
+  var xAxisGroup = svgContainer.append("g")
+                               .attr("transform", "translate(0, 100)")
+                               .call(xAxis);
+
+  svgContainer.append("text")
+              .attr("x", 75 )
+              .attr("y", 165 )
+              .style("text-anchor", "middle")
+              .text("negative sentiment");
+
+  svgContainer.append("text")
+              .attr("x", 425 )
+              .attr("y", 165 )
+              .style("text-anchor", "middle")
+              .text("positive sentiment");
+
+  return div;
 }

@@ -1,5 +1,4 @@
 class SamplesController < ApplicationController
-
   def index
   end
 
@@ -7,8 +6,10 @@ class SamplesController < ApplicationController
   end
 
   def analyze
+    # binding.pry
 
     if params[:url]
+
       res = HTTParty.post("http://gateway-a.watsonplatform.net/calls/url/URLGetRankedNamedEntities",
       :query => { :apikey => ENV["URL_SECRET_ALCHEMY"],
                  :url => params[:url][:url],
@@ -31,35 +32,45 @@ class SamplesController < ApplicationController
       @sample.user_id = session[:user_id]
       @sample.save
 
-      render json: { sample: @sample, keywords: @keywords, averages: @averages }
-    else
-      if params[:tweet]
-        tweeter = TwitterScraper.new
-        tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
-        string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
-        @sample = Sample.new({content: string_of_tweets})
-      elsif params[:file]
-        parsed_file = Yomu.new params[:file].tempfile
-        @sample = Sample.new({content: parsed_file.text})
-      else
-        # just create sample
-        @sample = Sample.new(sample_params)
+      render json: { sample: @sample, keywords: @keywords, averages: @averages } and return
+    elsif params[:image]
+      # Pull sample from image through Tesseract
+      engine = Tesseract::Engine.new do |config|
+        config.language  = :eng
+        config.blacklist = '|'
       end
-
-      caller = AlchemyCaller.new(@sample)
-      caller.call_API
-      caller.convert_to_keyword_objects
-
-      @keywords = @sample.keywords
-      calculator = MetricsCalculator.new(@sample.keywords)
-      @averages = calculator.return_averages_by_gender
-
-      @sample.user_id = session[:user_id]
-      @sample.save
-
-      render json: { sample: @sample, keywords: @keywords, averages: @averages }
-
+      def clean(text)
+        text.split(/\n/).compact.select { |v| v.size > 0 }
+      end
+      new_image =  params["image"].tempfile.path
+      text_from_image = clean(engine.text_for(new_image))
+      @sample = Sample.new({content: text_from_image})
+    elsif params[:tweet]
+      tweeter = TwitterScraper.new
+      tweet_objects = tweeter.user_whole_timeline(params[:tweet][:content])
+      string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
+      @sample = Sample.new({content: string_of_tweets})
+    elsif params[:file]
+      parsed_file = Yomu.new params[:file].tempfile
+      @sample = Sample.new({content: parsed_file.text})
+    else
+      # just create sample
+      @sample = Sample.new(sample_params)
     end
+
+    caller = AlchemyCaller.new(@sample)
+    caller.call_API
+    caller.convert_to_keyword_objects
+
+    @keywords = @sample.keywords
+    calculator = MetricsCalculator.new(@sample.keywords)
+    @averages = calculator.return_averages_by_gender
+
+    @sample.user_id = session[:user_id]
+    @sample.save
+
+    render json: { sample: @sample, keywords: @keywords, averages: @averages }
+
   end
 
   def create
