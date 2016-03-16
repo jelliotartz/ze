@@ -16,6 +16,7 @@ class APICoordinator
     else
       @input = {type: :text, value: params[:sample][:content]}
     end
+    binding.pry
   end
 
   # tesseract image processing
@@ -30,7 +31,7 @@ class APICoordinator
     end
 
     new_image =  image.tempfile.path
-    clean(engine.text_for(new_image))
+    clean(engine.text_for(new_image)).join(" ");
   end
 
   # tweet fetching
