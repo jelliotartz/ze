@@ -91,6 +91,5 @@ SamplesView.prototype.drawScatter = function() {
                 .attr("y", margins * height )
                 .style("text-anchor", "middle")
                 .text("biased against women");
-
     return div;
 }
