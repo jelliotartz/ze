@@ -36,10 +36,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    # binding.pry
     if logged_in?
       @user = User.find(params[:id])
       respond_to do |format|
-        format.html
+        format.html {}
+        format.js {}
         format.json { render :json => {samples: @user.samples, keywords: @user.keywords}.to_json }
       end
     else
