@@ -16,7 +16,6 @@ class APICoordinator
     else
       @input = {type: :text, value: params[:sample][:content]}
     end
-    binding.pry
   end
 
   # tesseract image processing

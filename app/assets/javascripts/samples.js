@@ -3,18 +3,17 @@ $(document).ready(function(){
   $(".content-input").on("ajax:success", appendText);
 
   $('form#image_submit').on("submit", function(e){
-      console.log("hit the image submit")
       e.preventDefault();
-      var thing = new FormData();
-      thing.append("image", $("#image_filename")[0].files[0])
-      console.log(thing)
+      var imageForm = new FormData();
+      imageForm.append("image", $("#image_filename")[0].files[0])
       $.ajax({
               url: "/analyze",
               type: "post",
               processData: false,
               contentType: false,
-              data: thing
+              data: imageForm
       }).done(function(responseData) {
+        $('form#image_submit')[0].reset();
         appendText(event, responseData)
       })
     })
