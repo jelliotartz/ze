@@ -6,9 +6,10 @@ $(function() {
     keywords.forEach(function(keyword) {
       var sample = samples.find(function(sample) { return sample.id === keyword.sample_id });
       sample.addKeyword(keyword);
+      keyword.sampleName = sample.name;
+      keyword.group = sample.group;
     })
 
-    var derivers = $.pivotUtilities.derivers;
     var renderers = $.extend($.pivotUtilities.renderers,
             $.pivotUtilities.c3_renderers);
     var averages = samples.map(function(sample) { return sample.calculateAverages() });
