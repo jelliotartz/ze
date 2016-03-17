@@ -1,7 +1,6 @@
 $(function() {
 
   $("#profile").on("ajax:success", function(event, data) {
-    // debugger;
     $("#content").empty();
     $("#content").append($("<div id=scatter><h3>Scatter of your samples</h3></div>"));
     $("#content").append($("<div id='highlighted-text'></div>"));

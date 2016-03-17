@@ -160,6 +160,38 @@ SampleView.prototype.bindPopups = function() {
   });
 }
 
+SampleView.prototype.bindPopups2 = function() {
+  var that = this;
+  $("#sample-show").on("click",".keyword",function() {
+    $("body").off("click", ".keyword-popup input");
+    $("body").find($(".keyword-popup")).remove();
+    var popup = $(JST["templates/keywordPopup"]());
+    var keyword_text = $(this).text();
+    var x = $(this).offset().left;
+    var y = $(this).offset().top - 50;
+    $("body").append(popup);
+    popup.css({
+                "position":"absolute",
+                "top": y, "left": x,
+                "background-color": "white",
+                "border": "1px solid black",
+                "padding": "10px"
+                })
+
+      $("body").on("click", ".keyword-popup input", function() {
+        var gender = $(this).val();
+        var keyword = that.sample.keywords.find(function(keyword) {
+          return keyword.text === keyword_text
+        });
+        keyword.gender = gender;
+        updateGender(keyword.id, gender);
+        popup.remove();
+        $("#sample-show").html(that.render());
+        $("body").off("click", ".keyword-popup input");
+      });
+  });
+}
+
 function updateGender(id, gender) {
   $.ajax({
     url: "/keywords/" + id,

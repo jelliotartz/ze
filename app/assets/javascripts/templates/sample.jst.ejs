@@ -1,8 +1,8 @@
 <div class="sample-view">
 <% if (view.sample.name !== "" && view.sample.name !== null) { %>
-  <h3><%= view.sample.name %></h3>
+  <h3><a href=/samples/<%= view.sample.id %> class='sample-link'><%= view.sample.name %></a></h3>
 <% } else { %>
-  <h3><%= "Untitled Sample" %></h3>
+  <h3><a href=/samples/<%= view.sample.id %> class='sample-link'><%= "Untitled Sample" %></a></h3>
 <% } %>
 
 <% if (view.sample.keywords.length !== 0) { %>

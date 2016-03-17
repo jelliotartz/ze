@@ -17,8 +17,11 @@ class SamplesController < ApplicationController
 
   end
 
-  def create
-    puts @sample.text
+
+  def show
+    sample = Sample.find_by(id: params[:id])
+    render json: { sample: sample,
+      keywords: sample.keywords }
   end
 
 
