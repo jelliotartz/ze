@@ -21,32 +21,31 @@
 	<h3>Samples: <span class="tool-popup tool-popup-icon" title="Samples display their marked-up content along with their sentiment keys, values, and corresponding sample content">?</span></h3>
 	<ul>
 		<% @sample_matches.each do |sample| %>
-		<li>
-			<div>
-				<h3>NAME</h3>
-				<p class="sample-content"><%= sample.content %></p>
-				<% @key_matches.each do |s| %>
-				<% if s.sample_id == sample.id %>
-				
-				<table class="keyword-table">
-					<tr>
-						<th><strong>Key</strong></th>
-						<th><strong>Score</strong></th>
-						<th><strong>Type</strong></th>
-						<th><strong>Gender</strong></th>
-					</tr>
+	<li>
+			<h3><%= sample.name %></h3>
+			<p class="sample-content"><%= sample.content %></p>
+			
+			<table class="keyword-table">
+				<tr>
+					<th><strong>Key</strong></th>
+					<th><strong>Score</strong></th>
+					<th><strong>Type</strong></th>
+					<th><strong>Gender</strong></th>
+				</tr>
+			<% @key_matches.each do |s| %>
+			<% if s.sample_id == sample.id %>
 
-					<tr>
-						<td><%= s.text %></td>
-						<td><%= s.sentiment_score %></td>
-						<td><%= s.sentiment_type %></td>
-						<td><%= s.gender %></td>
-					</tr>
-				</table>
-				<% end %>
-				<% end %>
-				<% end %>
-			</div>
+				<tr>
+					<td><%= s.text %></td>
+					<td><%= s.sentiment_score %></td>
+					<td><%= s.sentiment_type %></td>
+					<td><%= s.gender %></td>
+				</tr>
+			<% end %>
+			<% end %>
+			</table>
+			<hr>
+			<% end %>
 		</li>
 	</ul>
 </div>

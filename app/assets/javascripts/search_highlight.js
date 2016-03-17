@@ -1,27 +1,35 @@
 $(function(){
-	var keys = [];
-	// var samples = [];
+	$(".sample-content").each(function(i,sample) {
+		var keywords = [];
+		var scores = [];
+		var genders = [];
+		var types = [];
 
-	// $(".sample-content").each(function(i, keyword){
-	// 	samples.push(keyword.innerText);
-	// });
+		var contentHtml = $("<div>" + $(sample).text() + "</div>");
 
-	$(".key").each(function(i, keyword){
-		keys.push(keyword.innerText);
+		$(sample).siblings(".keyword-table").find("td:nth-child(1)").each(function(i, keyword){
+			keywords.push($(keyword).text());
+		});
+
+		$(sample).siblings(".keyword-table").find("td:nth-child(2)").each(function(i, score){
+			scores.push($(score).text());
+		});
+		
+		$(sample).siblings(".keyword-table").find("td:nth-child(3)").each(function(i, gender){
+			genders.push($(gender).text());
+		});
+
+		$(sample).siblings(".keyword-table").find("td:nth-child(4)").each(function(i, type){
+			types.push($(type).text());
+		});
+
+		for(var i=0; i < keywords.length; i++) {
+			contentHtml.highlight(keywords[i], { wordsOnly: true, element: 'span', className: genders[i] + " keyword " + types[i], data: { sentiment_score: parseInt(scores[i]) } });
+			
+		}
+
+    	$(sample).html(contentHtml)
+   //  	i++;
 	});
 
-
-	var i = 0;
-	$(".sample-content").each(function(sample) {
-
-  	var contentHtml = $("<div>" + sample.innerText + "</div>");
-
-    var higlightedContent = contentHtml.highlight(keys[i].text, { wordsOnly: true, element: 'span', className: keys[i].gender + " keyword " + keys[i].sentiment_type, data: { sentiment_score: keys[i].sentiment_score } });
-
-    	sample.innerHTML = higlightedContent;
-    	i++;
-  	});
-
-	console.log(keys);
-	console.log(samples);
 });
