@@ -32,11 +32,12 @@ class SamplesController < ApplicationController
     @sample = Sample.find(params[:id])
     @sample.destroy
     @sample.keywords.destroy_all
-    if current_user
-      redirect_to user_path(current_user.id)
-    else
-      redirect_to root_path
-    end
+    head :ok
+    # if current_user
+    #   redirect_to user_path(current_user.id)
+    # else
+    #   redirect_to root_path
+    # end
   end
 
   def compare

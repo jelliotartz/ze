@@ -24,4 +24,16 @@ $(function() {
     })
 
   });
+
+  $("body").on("click",".delete-sample", function(event) {
+    var that = $(this);
+    event.preventDefault();
+    $.ajax({
+      method: "delete",
+      url: $(this).attr('href')
+    })
+    .done(function(response) {
+      that.closest(".sample-view").remove();
+    })
+  })
 });
