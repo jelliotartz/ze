@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :tweets
 
+  resources :keywords, only: [:update]
+
   get '/tweets/get_username' => 'tweets#get_username'
   get '/samples/get_username' => 'samples#get_username'
 

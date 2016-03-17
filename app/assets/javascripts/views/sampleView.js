@@ -150,6 +150,7 @@ SampleView.prototype.bindPopups = function() {
           return keyword.text === keyword_text
         });
         keyword.gender = gender;
+        updateGender(keyword.id, gender);
         that.displayHighlightedContent();
         that.showStatistics();
         that.createNumberLine();
@@ -157,6 +158,17 @@ SampleView.prototype.bindPopups = function() {
         $("body").off("click", ".keyword-popup input");
       });
   });
+}
+
+function updateGender(id, gender) {
+  $.ajax({
+    url: "/keywords/" + id,
+    method: "put",
+    data: {id: id, gender: gender}
+  })
+  .done(function(response) {
+    console.log("success!");
+  })
 }
 
 
