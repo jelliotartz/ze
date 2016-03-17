@@ -61,8 +61,4 @@ class SamplesController < ApplicationController
     end
   end
 
-  private
-  def sample_params
-    params.require(:sample).permit(:content, :name)
-  end
 end

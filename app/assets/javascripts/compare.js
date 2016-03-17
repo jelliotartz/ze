@@ -7,7 +7,6 @@ $(function() {
       var sample = samples.find(function(sample) { return sample.id === keyword.sample_id });
       sample.addKeyword(keyword);
       keyword.sampleName = sample.name;
-      keyword.group = sample.group;
     })
 
     var renderers = $.extend($.pivotUtilities.renderers,

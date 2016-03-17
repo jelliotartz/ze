@@ -23,7 +23,7 @@ class TwitterScraper
 
   def user_whole_timeline(handle)
     collect_with_max_id do |max_id|
-      options = {count: 200, include_rts: true}
+      options = {count: 35, include_rts: true}
       options[:max_id] = max_id unless max_id.nil?
       @client.user_timeline(handle, options)
     end
