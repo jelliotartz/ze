@@ -1,7 +1,14 @@
 $(document).ready(function(){
 
   $(".content-input").on("ajax:success", appendText);
+  $(".content-input").on("ajax:error", function(event, response){
+    $(".content-input")[0].reset(); // reset form
+    // $("#output").off("click",".keyword")
+    // $("body").off("click", ".keyword-popup input")
+    $("#output").children().empty();
+    $("#error").html(response.responseText)
 
+  });
   $('form#image_submit').on("submit", function(e){
       e.preventDefault();
       var imageForm = new FormData();
@@ -25,6 +32,7 @@ function appendText(event, data) {
   $(".content-input")[0].reset(); // reset form
   $("#output").off("click",".keyword")
   $("body").off("click", ".keyword-popup input")
+  $("#error").empty();
   // create sample and keywords
   var sample = new Sample(data.sample);
   var keywords = data.keywords.map(function(keyword) { return new Keyword(keyword) })
