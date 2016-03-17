@@ -9,6 +9,7 @@
 			<li><a href="#twitter_form">Scrape Twitter</a></li>
 			<li><a href="#drop_form">Upload a File</a></li>
 			<li><a href="#url_form">Provide Url</a></li>
+			<li><a href="#multiple_url_form">Multiple Urls</a></li>
 			<li><a href="#image_form">Image OCR</a></li>
 			<span title="These options let you choose what format of text you would like to analyze." class=" tool-popup tool-popup-icon">?</span>
 		</ul>
@@ -37,6 +38,7 @@
 	</div>
 
 	<div id="url_form">
+
 		<%= form_for :url, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
 		<%= f.text_field :name, :placeholder => "Sample name", id: 'url_sample_name'  %>
 		<br>
@@ -46,6 +48,18 @@
 		<%= f.submit "Analyze", :class => 'twitter-submit-button' %>
 		<% end %>
 	</div>
+
+  <div id="multiple_url_form">
+    <%= form_for :url, {url: analyze_multiple_path, remote: true, html: { class: "text-box" } } do |f| %>
+    <%= f.text_field :name, :placeholder => "Name for all samples", id: 'url_sample_name'  %>
+    <br>
+    <br>
+    <%= f.text_field :url, :placeholder => "Enter multiple, comma-separated URLs" %>
+    <br>
+    <%= f.submit "Analyze", :class => 'twitter-submit-button' %>
+    <% end %>
+    <div id="multiple-url-messages"></div>
+  </div>
 
 	<div id="drop_form">
 		<%= form_tag({action: :analyze}, {multipart: true, class: "dropzone content-input", id:"drop-form"}) do %>
@@ -67,4 +81,5 @@
 	<div id="averages"></div>
 	<div id="highlighted-text"></div>
 	<div id="number-line"></div>
+	<div id="error"></div>
 </div>

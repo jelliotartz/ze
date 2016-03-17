@@ -61,7 +61,7 @@ class APICoordinator
   end
 
   def call_text_API
-    max_length = 4000
+    max_length = 4500
     # if @sample.content is small enough
     if @input.length > max_length
       content = @input[0...max_length]
@@ -92,11 +92,14 @@ class APICoordinator
                },
       :headers => { 'Content-Type' => 'application/x-www-form-urlencoded' } )
     @response = JSON.parse(response.body)
+     p @response
   end
 
   def create_sample
-    if @response['text']
-      @sample = Sample.new(content: @response['text'], name: @sample_name)
+    if @response["statusInfo"] == "content-is-empty"
+      return false
+    elsif @response['text']
+      return @sample = Sample.new(content: @response['text'], name: @sample_name)
     end
   end
 

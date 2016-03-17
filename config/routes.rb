@@ -1,17 +1,26 @@
 Rails.application.routes.draw do
 
   get '/users/search' => 'users#search'
+  get '/samples/compare' => 'samples#compare'
+  get '/keywords/compare' => 'keywords#compare'
+  get '/samples/new_multiple' => 'samples#new_multiple'
+
 
   resources :users, only: [:new, :create, :edit, :update]
 
   resources :samples, except: [:edit, :update]
   post 'analyze' => 'samples#analyze', as: :analyze
+  post 'analyze_multiple' => 'samples#analyze_multiple', as: :analyze_multiple
+
 
   resources :reports, except: [:edit, :update]
 
   resources :users
 
   resources :tweets
+
+  resources :keywords, only: [:create, :update]
+
 
   get '/tweets/get_username' => 'tweets#get_username'
   get '/samples/get_username' => 'samples#get_username'
