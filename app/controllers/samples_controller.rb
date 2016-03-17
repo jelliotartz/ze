@@ -1,5 +1,8 @@
 class SamplesController < ApplicationController
 
+  def new
+  end
+
   def analyze
     caller = APICoordinator.new(params)
     caller.call_API
@@ -12,14 +15,10 @@ class SamplesController < ApplicationController
 
   end
 
-
   def show
     sample = Sample.find_by(id: params[:id])
     render json: { sample: sample,
       keywords: sample.keywords }
-  end
-
-  def new
   end
 
   def destroy
