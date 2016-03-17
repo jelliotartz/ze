@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20160312160445) do
     t.datetime "updated_at",                     null: false
   end
 
-
   create_table "samples", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
