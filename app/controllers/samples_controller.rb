@@ -1,9 +1,4 @@
 class SamplesController < ApplicationController
-  def index
-  end
-
-  def input_text
-  end
 
   def analyze
     caller = APICoordinator.new(params)
@@ -23,7 +18,6 @@ class SamplesController < ApplicationController
     render json: { sample: sample,
       keywords: sample.keywords }
   end
-
 
   def new
   end
