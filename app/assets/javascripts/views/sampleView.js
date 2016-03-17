@@ -199,7 +199,6 @@ function updateGender(id, gender) {
     data: {id: id, gender: gender}
   })
   .done(function(response) {
-    console.log("success!");
   })
 }
 

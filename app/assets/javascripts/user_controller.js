@@ -15,6 +15,7 @@ $(function() {
 
     var samplesView = new SamplesView(samples)
     $("#scatter").append(samplesView.drawScatter());
+    $("#scatter").append($("<a href=/samples/compare>Explore your sample and keyword data</a>"))
 
     samples.forEach(function(sample) {
       var view = new SampleView(sample);
