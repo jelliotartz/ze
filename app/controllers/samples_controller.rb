@@ -41,9 +41,6 @@ class SamplesController < ApplicationController
   def new
   end
 
-  def new_multiple
-  end
-
   def destroy
     @sample = Sample.find(params[:id])
     @sample.destroy
