@@ -1,29 +1,49 @@
 <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
 
-<h2 class="new-sample-title">Enter your text</h2>
+<h2 class="new-sample-title">Analyze Data</h2>
 
 <div id="sample-form-container">
 	<div id="toggle-form">
 		<ul>
-			<li><a href="#text_form">Text</a></li>
-			<li><a href="#twitter_form">Twitter</a></li>
-			<li><a href="#drop_form">Upload</a></li>
+			<li><a href="#text_form">Enter Text</a></li>
+			<li><a href="#twitter_form">Scrape Twitter</a></li>
+			<li><a href="#drop_form">Upload a File</a></li>
+			<li><a href="#url_form">Provide Url</a></li>
+			<li><a href="#image_form">Image OCR</a></li>
+			<span title="These options let you choose what format of text you would like to analyze." class=" tool-popup tool-popup-icon">?</span>
 		</ul>
 	</div>
 
 	<div id="text_form">
 		<%= form_for :sample, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
-		<%= f.text_area :content %>
+		<%= f.text_field :name, :placeholder => "Sample name", id: 'text_sample_name'  %>
 		<br>
-		<%= f.submit "Enter your text!" %>
+		<br>
+		<%= f.text_area :content, :placeholder => "Sample text" %>
+		<br>
+		<%= f.submit "Analyze!" %>
 		<% end %>
 	</div>
 
 	<div id="twitter_form">
-		<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
-		<%= f.text_field :content %>
+		<%= form_for :tweet, {url: analyze_path, remote: true, html: { class: "content-input text-box", autocomplete: "off" } } do |f| %>
+		<%= f.text_field :name, :placeholder => "Sample name"  %>
 		<br>
-		<%= f.submit "Enter a twitter handle!", :class => 'twitter-submit-button' %>
+		<br>
+		<%= f.text_field :content, :placeholder => "Twitter handle" %>
+		<br>
+		<%= f.submit "Analyze", :class => 'twitter-submit-button' %>
+		<% end %>
+	</div>
+
+	<div id="url_form">
+		<%= form_for :url, {url: analyze_path, remote: true, html: { class: "content-input text-box" } } do |f| %>
+		<%= f.text_field :name, :placeholder => "Sample name", id: 'url_sample_name'  %>
+		<br>
+		<br>
+		<%= f.text_field :url, :placeholder => "URL" %>
+		<br>
+		<%= f.submit "Analyze", :class => 'twitter-submit-button' %>
 		<% end %>
 	</div>
 
@@ -31,7 +51,20 @@
 		<%= form_tag({action: :analyze}, {multipart: true, class: "dropzone content-input", id:"drop-form"}) do %>
 		<% end %>
 	</div>
+
+	<div id="image_form">
+		<%= form_for :image, {url: analyze_path, multipart: true, authenticity_token: true, html: { id: "image_submit" } } do |f| %>
+		  <%= f.label "Upload an image"  %>
+		  <%= f.file_field :filename %>
+		  <%= f.submit "Submit", id: "submit_image" %>
+		<% end %>
+	</div>
 </div>
 
+
+
 <div id="output">
+	<div id="averages"></div>
+	<div id="highlighted-text"></div>
+	<div id="number-line"></div>
 </div>

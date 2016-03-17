@@ -1,0 +1,25 @@
+.tool-popup-modal {
+	position: absolute;
+    z-index: 99999;
+    background-color: #dedede;
+    left: -9999px;
+    padding: 2px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    width: 250px;
+    box-shadow: 3px 3px 6px grey;
+    p {
+    margin: 0;
+    padding: 0;
+    color: #4582ec;
+    background-color: #ffffff;
+    padding: 2px 7px;
+	}
+}
+
+.tool-popup-icon {
+	font-family: Glyphicons Halflings;
+	font-size: 15px;
+    color: red;
+    font-weight: bold;
+}

@@ -1,5 +1,4 @@
 class SamplesController < ApplicationController
-
   def index
   end
 
@@ -7,37 +6,22 @@ class SamplesController < ApplicationController
   end
 
   def analyze
-
-    if params[:tweet]
-      tweeter = TwitterScraper.new
-      tweet_objects = tweeter.user_timeline_20_recent(params[:tweet][:content])
-      string_of_tweets = tweeter.concatenate_tweets(tweet_objects)
-      @sample = Sample.new({content: string_of_tweets})
-    elsif params[:file]
-        parsed_file = Yomu.new params[:file].tempfile
-        @sample = Sample.new({content: parsed_file.text})
-    else
-      # just create sample
-      @sample = Sample.new(sample_params)
-    end
-
-    caller = AlchemyCaller.new(@sample)
+    caller = APICoordinator.new(params)
     caller.call_API
-    caller.convert_to_keyword_objects
+    sample = caller.create_sample
+    keywords = caller.create_keywords
 
-    @keywords = @sample.keywords
-    calculator = MetricsCalculator.new(@sample.keywords)
-    @averages = calculator.return_averages_by_gender
-
-    @sample.user_id = session[:user_id]
-    @sample.save
-
-    render json: { sample: @sample, keywords: @keywords, averages: @averages }
+    sample.user_id = session[:user_id]
+    sample.save
+    render json: { sample: sample, keywords: keywords }
 
   end
 
-  def create
-    puts @sample.text
+
+  def show
+    sample = Sample.find_by(id: params[:id])
+    render json: { sample: sample,
+      keywords: sample.keywords }
   end
 
 
@@ -55,8 +39,16 @@ class SamplesController < ApplicationController
     end
   end
 
+  def compare
+    user = User.find_by(id: session[:user_id])
+    respond_to do |format|
+      format.html
+      format.json { render json: user.samples}
+    end
+  end
+
   private
   def sample_params
-    params.require(:sample).permit(:content)
+    params.require(:sample).permit(:content, :name)
   end
 end

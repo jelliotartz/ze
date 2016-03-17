@@ -109,7 +109,7 @@ MALE_WORDS = [
     in_female = self.matches?(FEMALE_WORDS, text.downcase)
 
     if in_female && in_male
-      "unisex"
+      "neutral"
     elsif in_male
       "male"
     elsif in_female
@@ -132,7 +132,7 @@ MALE_WORDS = [
     if gender == "unknown"
       return "neutral"
     elsif percentage < unisex_threshold && percentage > 1 - unisex_threshold
-      return "unisex"
+      return "neutral"
     else percentage
       return gender
     end

@@ -1,20 +1,60 @@
+$positive-green: #33CC66;
+$negative-salmon: #DB807A;
+$male-slate: #4C778F;
+$female-fuscia: #A1045A;
 textarea {
   width: 50%;
   height: 100px;
 }
 
 .positive {
-  color: green;
+  color: $positive-green;
+  text-decoration: underline;
 }
 
 .negative {
-  color: red;
+  color: $negative-salmon;
+  text-decoration: underline;
 }
 
 .male {
-  background-color: #52CFF8;
+  background-color: $male-slate;
+  text-decoration: underline;
 }
 
 .female {
-  background-color: pink;
+  background-color: $female-fuscia;
+  text-decoration: underline;
+}
+
+.highlighted-text {
+  margin-bottom: 50px;
+}
+
+// split layout into side-by-side
+#averages {
+	width: 50%;
+	float: left;
+}
+
+#number-line {
+	width: 50%;
+	display: inline-block;
+	float: left;
+	clear: left;
+}
+
+#scatter {
+	position: fixed;
+	width: 40%;
+	display: inline-block;
+	float: left;
+	clear: left;
+}
+
+#highlighted-text {
+	width: 50%;
+	clear: right;
+	float: right;
+	text-align: justify;
 }

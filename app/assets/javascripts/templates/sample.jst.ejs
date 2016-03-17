@@ -1,0 +1,26 @@
+<div class="sample-view">
+<% if (view.sample.name !== "" && view.sample.name !== null) { %>
+  <h3><a href=/samples/<%= view.sample.id %> class='sample-link'><%= view.sample.name %></a></h3>
+<% } else { %>
+  <h3><a href=/samples/<%= view.sample.id %> class='sample-link'><%= "Untitled Sample" %></a></h3>
+<% } %>
+
+<% if (view.sample.keywords.length !== 0) { %>
+  <h4>Average sentiment by gender</h4>
+  <p>Using sentiment analysis, these averages reflect, on a scale from -1 to 1, how negatively or positively the passage feels about men and women.</p>
+
+  <div class="averages"><%= view.generateAverageView(view.sample.calculateAverages())[0].outerHTML %></div>
+<% } %>
+
+
+<% if (view.sample.genderedKeywords().length !== 0) { %>
+  <h4>Keywords</h4>
+  <p>These are the gender-coded keywords in your passage and how our algorithm rated their sentiment.</p>
+
+  <div class="number-line"><%= view.createNumberLine2()[0].outerHTML %></div>
+<% } %>
+
+<h4>Highlighted Text</h4><p>See below for a deeper analysis of your text: <span class='negative'>Red</span> means negative. <span class='positive'>Green</span> means positive. <span class='female'>Pink</span> means it's a feminine-coded word. <span class='male'>Blue</span> means it's a masculine-coded word.</p>
+
+<div class="highlighted-text"><%= view.wrapSampleContent()[0].outerHTML %></div>
+</div>

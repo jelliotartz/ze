@@ -1,3 +1,9 @@
+
+// adjust size of url text input
+#url_url {
+  width: 600px;
+}
+
 .new-sample-title {
 	padding: 20px;
 	text-align: center;
@@ -30,6 +36,30 @@
 			padding-right: 20px;
 		}
 	}
+}
+
+
+
+//adjust the size of name field for forms
+
+#text_sample_name {
+	width: 340px;
+}
+
+#url_sample_name {
+	width: 600px;
+}
+
+
+
+
+
+
+#image_submit * {
+	display: block;
+	max-width: 300px;
+	margin: 10px auto;
+	text-align: center;
 }
 
 #sample-form-container {
