@@ -1,6 +1,6 @@
 <% if flash[:danger] %>
-    <div class="danger"><%= flash[:danger] %></div>
-  <% end %>
+  <div class="danger"><%= flash[:danger] %></div>
+<% end %>
 
 <%= form_tag '/login', method: :post, id: "login-form" do %>
   <p>

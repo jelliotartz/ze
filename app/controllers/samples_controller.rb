@@ -7,11 +7,15 @@ class SamplesController < ApplicationController
     caller = APICoordinator.new(params)
     caller.call_API
     sample = caller.create_sample
-    keywords = caller.create_keywords
-
-    sample.user_id = session[:user_id]
-    sample.save
-    render json: { sample: sample, keywords: keywords }
+    if sample
+      keywords = caller.create_keywords
+      sample.user_id = session[:user_id]
+      sample.save
+      render json: { sample: sample, keywords: keywords },
+      :status => 200
+    else
+      render json: "Our system did not find any text that it could analyze on that page.", :status => :bad_request
+    end
 
   end
 
