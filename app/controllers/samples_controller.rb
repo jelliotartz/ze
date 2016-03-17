@@ -39,6 +39,14 @@ class SamplesController < ApplicationController
     end
   end
 
+  def compare
+    user = User.find_by(id: session[:user_id])
+    respond_to do |format|
+      format.html
+      format.json { render json: user.samples}
+    end
+  end
+
   private
   def sample_params
     params.require(:sample).permit(:content, :name)

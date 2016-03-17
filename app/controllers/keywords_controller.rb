@@ -5,4 +5,7 @@ class KeywordsController < ApplicationController
     keyword.save
     head :ok
   end
+
+  def compare
+  end
 end
