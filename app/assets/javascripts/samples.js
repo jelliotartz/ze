@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 function appendText(event, data) {
   // history.pushState("", "Analyze","/analyze")
-  $(".content-input")[0].reset(); // reset form
+  $(".content-input").each(function(index, form) { form.reset(); }); // reset form
   $("#output").off("click",".keyword")
   $("body").off("click", ".keyword-popup input")
   $("#error").empty();

@@ -1,30 +1,30 @@
-$positive-green: #33CC66;
-$negative-salmon: #DB807A;
-$male-slate: #4C778F;
-$female-fuscia: #A1045A;
+$positive-green: #069E4B;
+$negative-salmon: #EF4136;
+$male-slate: #9BBEF3;
+$female-fuscia: rgba(224, 143, 143, 0.48);
 textarea {
   width: 50%;
   height: 100px;
 }
 
+.keyword {
+  text-decoration: underline;
+}
+
 .positive {
   color: $positive-green;
-  text-decoration: underline;
 }
 
 .negative {
   color: $negative-salmon;
-  text-decoration: underline;
 }
 
 .male {
   background-color: $male-slate;
-  text-decoration: underline;
 }
 
 .female {
   background-color: $female-fuscia;
-  text-decoration: underline;
 }
 
 .highlighted-text {
