@@ -31,12 +31,15 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
-            <li><%= link_to current_user.email, user_path(current_user), remote: true, "data-type" => "json", id: "profile" %></li>
-            <li><%= link_to "Create new sample", new_sample_path %></li>
-            <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+          <li><form action="/users/search" class="search-form">
+            <input name="query" placeholder="search keywords">
+          </form></li>
+          <li><%= link_to "Create new sample", new_sample_path %></li>
+          <li><%= link_to current_user.email, user_path(current_user), remote: true, "data-type" => "json", id: "profile" %></li>
+          <li><%= link_to 'Logout', logout_path, method: :delete %></li>
           <% else %>
-            <li><%= link_to 'Register', new_user_path %></li>
-            <li><%= link_to 'Login', login_path %></li>
+          <li><%= link_to 'Register', new_user_path %></li>
+          <li><%= link_to 'Login', login_path %></li>
           <% end %>
         </ul>
       </div>
