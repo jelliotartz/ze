@@ -24,6 +24,19 @@ class SamplesController < ApplicationController
       keywords: sample.keywords }
   end
 
+  def analyze_multiple
+    urls = params[:url][:url].split(',')
+    urls.each do |url|
+      caller = APICoordinator.new({url: {url: url, name: params[:url][:name]}})
+      caller.call_API
+      sample = caller.create_sample
+      keywords = caller.create_keywords
+      sample.user_id = session[:user_id]
+      sample.save
+    end
+    render json: {message: "Your samples were saved."}
+  end
+
 
   def new
   end

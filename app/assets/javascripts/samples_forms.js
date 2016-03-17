@@ -5,6 +5,7 @@ $(function(){
 	var toggleText = $("#toggle-text");
 	var dropZoneForm = $("#drop_form");
 	var urlForm = $("#url_form");
+	var multipleUrlForm = $("#multiple_url_form");
 	var imageForm = $("#image_form");
 
 	Dropzone.options.dropForm = {
@@ -32,6 +33,7 @@ $(function(){
 
 	textForm.addClass("shown");
 	urlForm.hide();
+	multipleUrlForm.hide();
 	twitterForm.hide();
 	dropZoneForm.hide();
 	imageForm.hide();
