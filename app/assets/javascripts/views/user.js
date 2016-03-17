@@ -8,12 +8,6 @@ $(function() {
       sample.addKeyword(keyword);
     })
 
-    var derivers = $.pivotUtilities.derivers;
-    var averages = samples.map(function(sample) { return sample.calculateAverages() });
-    samples.forEach(function(sample) { sample.female = sample.calculateAverages().female || 0; sample.male = sample.calculateAverages().male || 0 });
-
-    $("#scatter").pivotUI(samples, { renderers: $.pivotUtilities.c3_renderers });
-
     // sample.addKeywords(keywords);
 
     $("#scatter").append(drawScatter(samples));

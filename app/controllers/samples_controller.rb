@@ -43,7 +43,7 @@ class SamplesController < ApplicationController
     user = User.find_by(id: session[:user_id])
     respond_to do |format|
       format.html
-      format.json { render json: user.samples}
+      format.json { render json: { samples: user.samples, keywords: user.keywords }}
     end
   end
 
