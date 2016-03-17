@@ -61,7 +61,7 @@ class APICoordinator
   end
 
   def call_text_API
-    max_length = 4000
+    max_length = 4500
     # if @sample.content is small enough
     if @input.length > max_length
       content = @input[0...max_length]

@@ -4,7 +4,6 @@ function Sample(sample_details) {
   this.description = sample_details["description"];
   this.content = sample_details["content"];
   this.user_id = sample_details["user_id"];
-  this.group_id = sample_details["group_id"];
   this.keywords = [];
 }
 
