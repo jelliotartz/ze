@@ -17,8 +17,11 @@ class SamplesController < ApplicationController
 
   end
 
-  def create
-    puts @sample.text
+
+  def show
+    sample = Sample.find_by(id: params[:id])
+    render json: { sample: sample,
+      keywords: sample.keywords }
   end
 
 
@@ -29,10 +32,19 @@ class SamplesController < ApplicationController
     @sample = Sample.find(params[:id])
     @sample.destroy
     @sample.keywords.destroy_all
-    if current_user
-      redirect_to user_path(current_user.id)
-    else
-      redirect_to root_path
+    head :ok
+    # if current_user
+    #   redirect_to user_path(current_user.id)
+    # else
+    #   redirect_to root_path
+    # end
+  end
+
+  def compare
+    user = User.find_by(id: session[:user_id])
+    respond_to do |format|
+      format.html
+      format.json { render json: { samples: user.samples, keywords: user.keywords }}
     end
   end
 

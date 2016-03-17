@@ -27,7 +27,7 @@ textarea {
   text-decoration: underline;
 }
 
-#highlighted-text {
+.highlighted-text {
   margin-bottom: 50px;
 }
 
@@ -46,7 +46,7 @@ textarea {
 
 #scatter {
 	position: fixed;
-	width: 50%;
+	width: 40%;
 	display: inline-block;
 	float: left;
 	clear: left;

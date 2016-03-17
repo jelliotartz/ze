@@ -1,8 +1,8 @@
 <div class="sample-view">
 <% if (view.sample.name !== "" && view.sample.name !== null) { %>
-  <h3><%= view.sample.name %></h3>
+  <h3><a href=/samples/<%= view.sample.id %> class='sample-link'><%= view.sample.name %></a></h3>
 <% } else { %>
-  <h3><%= "Untitled Sample" %></h3>
+  <h3><a href=/samples/<%= view.sample.id %> class='sample-link'><%= "Untitled Sample" %></a></h3>
 <% } %>
 
 <% if (view.sample.keywords.length !== 0) { %>
@@ -23,4 +23,6 @@
 <h4>Highlighted Text</h4><p>See below for a deeper analysis of your text: <span class='negative'>Red</span> means negative. <span class='positive'>Green</span> means positive. <span class='female'>Pink</span> means it's a feminine-coded word. <span class='male'>Blue</span> means it's a masculine-coded word.</p>
 
 <div class="highlighted-text"><%= view.wrapSampleContent()[0].outerHTML %></div>
+
+<a href="/samples/<%= String(view.sample.id) %>" class="delete-sample">Delete this sample</a>
 </div>

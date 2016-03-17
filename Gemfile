@@ -33,9 +33,10 @@ gem 'twitter'
 
 gem 'guess'
 gem 'd3-rails'
-gem 'tesseract-ocr'
+# gem 'tesseract-ocr'
 gem 'remotipart'
 gem 'ejs'
+gem 'jquery-ui-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

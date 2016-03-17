@@ -7,7 +7,7 @@ $(function() {
       var sample = samples.find(function(sample) { return sample.id === keyword.sample_id });
       sample.addKeyword(keyword);
     })
-    // debugger;
+
     // sample.addKeywords(keywords);
 
     $("#scatter").append(drawScatter(samples));
