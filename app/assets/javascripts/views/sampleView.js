@@ -84,8 +84,8 @@ SampleView.prototype.createNumberLine = function(sample) {
     .enter()
     .append("circle")
     .attr("cx", function(d) { return linearScale(d.sentiment_score) })
-    .attr("cy", 70)
-    .attr("r", 15)
+    .attr("cy", 75)
+    .attr("r", 10)
     .style("fill", function(d) { return colorFromGender(d.gender) })
 
     .on("mouseover", function() {return tooltip.style("visibility", "visible");})
@@ -101,7 +101,9 @@ SampleView.prototype.createNumberLine = function(sample) {
 
   var xAxisGroup = svgContainer.append("g")
                                .attr("transform", "translate(0, 100)")
-                               .call(xAxis);
+                               .call(xAxis)
+                               .style("stroke-width","1px");
+
 
   svgContainer.append("text")
               .attr("x", 75 )
@@ -134,7 +136,7 @@ SampleView.prototype.bindPopups = function() {
     var popup = $(JST["templates/keywordPopup"]());
     var keyword_text = $(this).text();
     var x = $(this).offset().left;
-    var y = $(this).offset().top - 50;
+    var y = $(this).offset().top - 68;
     $("body").append(popup);
     popup.css({
                 "position":"absolute",
@@ -168,7 +170,7 @@ SampleView.prototype.bindPopups2 = function() {
     var popup = $(JST["templates/keywordPopup"]());
     var keyword_text = $(this).text();
     var x = $(this).offset().left;
-    var y = $(this).offset().top - 50;
+    var y = $(this).offset().top - 68;
     $("body").append(popup);
     popup.css({
                 "position":"absolute",
@@ -225,8 +227,8 @@ SampleView.prototype.createNumberLine2 = function() {
     .enter()
     .append("circle")
     .attr("cx", function(d) { return linearScale(d.sentiment_score) })
-    .attr("cy", 70)
-    .attr("r", 15)
+    .attr("cy", 75)
+    .attr("r", 10)
     .style("fill", function(d) { return colorFromGender(d.gender) })
     .on("mouseover", function() {return tooltip.style("visibility", "visible");})
     .on("mousemove", function() { return tooltip.style("top", (d3.event.pageY-35)+"px").style("left", (d3.event.pageX+10)+"px").text(d3.event.currentTarget.__data__.text);})
