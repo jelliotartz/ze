@@ -17,7 +17,9 @@ $(function() {
     $("#scatter").append(samplesView.drawScatter());
     $("#scatter").append($("<a href=/samples/compare>Explore your sample and keyword data</a>"))
 
-    samples.forEach(function(sample) {
+    var sortedSamples = samples.sort(function(a, b) { return new Date(b.created_at) - new Date(a.created_at) });
+
+    sortedSamples.forEach(function(sample) {
       var view = new SampleView(sample);
       $("#highlighted-text").append(view.render());
       // view.bindPopups();

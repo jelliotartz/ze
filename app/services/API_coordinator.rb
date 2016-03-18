@@ -74,6 +74,7 @@ class APICoordinator
                :text => content,
                :showSourceText => 1,
                :outputMode => 'json',
+               :maxRetrieve => 150,
                :sentiment => 1
              },
       :headers => { 'Content-Type' => 'application/x-www-form-urlencoded' } )
@@ -88,6 +89,7 @@ class APICoordinator
                  :sourceText => "cleaned",
                  :showSourceText => 1,
                  :outputMode => 'json',
+                 :maxRetrieve => 150,
                  :sentiment => 1
                },
       :headers => { 'Content-Type' => 'application/x-www-form-urlencoded' } )
