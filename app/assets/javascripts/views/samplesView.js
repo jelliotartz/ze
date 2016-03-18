@@ -16,6 +16,10 @@ SamplesView.prototype.drawScatter = function() {
                                .domain([-1,1])
                                .range([margins * width, (1 - margins) * width]);
 
+    var yScale = d3.scale.linear()
+                               .domain([-1,1])
+                               .range([(1 - margins) * width, margins * width]);
+
     var xAxis = d3.svg.axis()
                    .scale(linearScale)
                    .ticks(2);
@@ -52,7 +56,7 @@ SamplesView.prototype.drawScatter = function() {
                 .enter()
                 .append("circle")
                 .attr("cx", function(d) { return linearScale(d.female || 0) })
-                .attr("cy", function(d) { return linearScale(d.male || 0) })
+                .attr("cy", function(d) { return yScale(d.male || 0) })
                 .attr("r", 5 )
 
     svgContainer.append("text")

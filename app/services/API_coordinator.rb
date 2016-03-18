@@ -42,7 +42,7 @@ class APICoordinator
   def fetch_tweets(handle)
     handle = handle[1..-1] if handle[0] == "@"
     tweeter = TwitterScraper.new
-    tweet_objects = tweeter.user_whole_timeline(handle)
+    tweet_objects = tweeter.user_timeline_20_recent(handle)
     tweeter.concatenate_tweets(tweet_objects)
   end
 
