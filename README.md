@@ -4,11 +4,6 @@
 A text-analysis app that rates content for gender bias.
 
 
-### Current Status
-
-[![Build Status](https://travis-ci.org/datu925/ze.svg?branch=master)](https://travis-ci.org/datu925/ze)
-
-
 ### Availability
 
 The app is available on [Heroku](https://projectze.herokuapp.com)
